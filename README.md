@@ -28,7 +28,7 @@ This repo is the **marketing website and a fully clickable demo app**. Everythin
 
 ## Stack
 
-A static site with no build step: `index.html`, `css/styles.css`, and `js/` (`i18n.js`, `data.js`, `app.js`). Hash routes: `#/` website, `#/login`, `#/app/<view>`.
+A static site with no build step: `index.html`, `css/styles.css`, and `js/` (`i18n.js`, `data.js`, `app.js`). Hash routes: `#top` website, `#login`, `#app-<view>`.
 
 ```bash
 # run locally

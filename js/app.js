@@ -33,7 +33,7 @@ function renderLanding(){
  $('#fgrid').innerHTML=F.filter(f=>ff==='all'||f.st===ff).map((f,i)=>`<article class="fcard"><div class="top-row"><span class="ic">${svg(f.ic)}</span><span class="tag ${stCls[f.st]}">${esc(stLbl[f.st])}</span></div><h3>${esc(L(f.t))}</h3><p>${esc(L(f.d))}</p><div class="phase">${esc(f.ph)}</div></article>`).join('');
  $('#road').innerHTML=X.ROADMAP.map(r=>`<div class="phase-card ${r.now?'now':''}">${r.now?`<span class="tag acc" style="align-self:flex-start">${LANG==='hi'?'अभी':'Now'}</span>`:''}<div class="when">${esc(r.when)}</div><h3>${esc(L(r.t))}</h3><ul>${L(r.items).map(i=>`<li>${esc(i)}</li>`).join('')}</ul><div class="gate">${esc(L(r.gate))}</div></div>`).join('');
  $('#plans').innerHTML=X.PLANS.map(p=>{const price=bill==='m'?p.m:p.y;const per=bill==='m'?(LANG==='hi'?'/ महीना':'/ month'):(LANG==='hi'?'/ साल':'/ year');
-  return `<div class="plan ${p.feat?'feat':''}">${p.feat?`<span class="tag acc" style="align-self:flex-start">${LANG==='hi'?'ज़्यादातर क्लिनिक':'Most clinics'}</span>`:''}<h3>${esc(L(p.t))}</h3><div class="price">₹${price.toLocaleString('en-IN')}<small> ${price?per:''}${p.per?(LANG==='hi'?' प्रति डॉक्टर':' per doctor'):''}</small></div><ul>${L(p.items).map(i=>`<li>${esc(i)}</li>`).join('')}</ul><p class="note">${esc(L(p.note))}</p><a class="btn ${p.feat?'primary':''}" href="${p.m?'#contact':'#/login'}">${p.m?(LANG==='hi'?'डेमो विज़िट माँगें':'Book a demo visit'):(LANG==='hi'?'मुफ़्त शुरू करें':'Start free')}</a></div>`;}).join('');
+  return `<div class="plan ${p.feat?'feat':''}">${p.feat?`<span class="tag acc" style="align-self:flex-start">${LANG==='hi'?'ज़्यादातर क्लिनिक':'Most clinics'}</span>`:''}<h3>${esc(L(p.t))}</h3><div class="price">₹${price.toLocaleString('en-IN')}<small> ${price?per:''}${p.per?(LANG==='hi'?' प्रति डॉक्टर':' per doctor'):''}</small></div><ul>${L(p.items).map(i=>`<li>${esc(i)}</li>`).join('')}</ul><p class="note">${esc(L(p.note))}</p><a class="btn ${p.feat?'primary':''}" href="${p.m?'#contact':'#login'}">${p.m?(LANG==='hi'?'डेमो विज़िट माँगें':'Book a demo visit'):(LANG==='hi'?'मुफ़्त शुरू करें':'Start free')}</a></div>`;}).join('');
  $('#teamGrid').innerHTML=X.TEAM.map(m=>`<div class="member"><span class="pic">${esc(m.ini)}</span><h3>${esc(m.name)}</h3><div class="role">${esc(L(m.role))}</div><p>${esc(L(m.bio))}</p><div class="links">${m.links.map(l=>`<a class="btn sm" href="${l[1]}" ${l[1].startsWith('http')||l[1].endsWith('.pdf')?'target="_blank" rel="noopener"':''}>${esc(l[0])}</a>`).join('')}</div></div>`).join('');
  $('#faqGrid').innerHTML=X.FAQ.map(q=>`<details><summary>${esc(L(q[0]))}</summary><p>${esc(L(q[1]))}</p></details>`).join('');
  renderPapers();
@@ -125,7 +125,7 @@ function renderApp(){
   `<button data-act="logout">${svg('out')}<span>${esc(t('app.logout'))}</span></button><div class="doc"><span class="av">${esc(S.lh.doctor.replace(/^Dr\.?\s*/,'').split(' ').map(w=>w[0]).join('').slice(0,2))}</span><span><b>${esc(S.lh.doctor)}</b>${esc(S.lh.clinic)}</span></div>`;
  ({home:vHome,schedule:vSchedule,intake:vIntake,opd:vOpd,patients:vPatients,settings:vSettings})[VIEW]();
 }
-function go(v){VIEW=v;location.hash='#/app/'+v;}
+function go(v){VIEW=v;location.hash='#app-'+v;}
 
 /* HOME */
 const QUICK=['Diabetic patients with HbA1c above 7','Who is due for follow-up this week?','Summarise Ramesh Prasad','How many patients came on WhatsApp today?','Patients with allergies'];
@@ -289,15 +289,15 @@ function waView(){const p=cur(),rx=p.rx,Lh=S.lh;if(!rx.meds.length){toast('Add m
 let tt;function toast(m){const e=$('#toast');e.textContent=m;e.hidden=false;clearTimeout(tt);tt=setTimeout(()=>e.hidden=true,3200);}
 
 /* ---------------- router ---------------- */
-function route(){const h=location.hash||'#/';
+function route(){const h=location.hash||'#top';
  const authed=store.get('arx-auth',false);
- const isApp=h.startsWith('#/app'),isLogin=h==='#/login';
+ const isApp=h.startsWith('#app-'),isLogin=h==='#login';
  $('#page-landing').hidden=isApp||isLogin;$('#page-login').hidden=!isLogin;$('#page-app').hidden=!isApp;$('#footer').hidden=isApp;
- $('#loginBtn').textContent=authed?(LANG==='hi'?'डैशबोर्ड':'Dashboard'):t('nav.login');$('#loginBtn').setAttribute('href',authed?'#/app/home':'#/login');
+ $('#loginBtn').textContent=authed?(LANG==='hi'?'डैशबोर्ड':'Dashboard'):t('nav.login');$('#loginBtn').setAttribute('href',authed?'#app-home':'#login');
  $('#nav').classList.remove('open');
- if(isApp){if(!authed){location.hash='#/login';return;}const v=h.split('/')[2];VIEW=VIEWS.some(x=>x[0]===v)?v:'home';renderApp();window.scrollTo(0,0);}
+ if(isApp){if(!authed){location.hash='#login';return;}const v=h.slice(5);VIEW=VIEWS.some(x=>x[0]===v)?v:'home';renderApp();window.scrollTo(0,0);}
  else if(isLogin){window.scrollTo(0,0);}
- else if(h!=='#/'&&h.length>1&&!h.startsWith('#/')){const el=document.getElementById(h.slice(1));if(el)setTimeout(()=>el.scrollIntoView({behavior:reduce?'auto':'smooth'}),0);}
+ else if(h.length>1){const el=document.getElementById(h.slice(1));if(el)setTimeout(()=>el.scrollIntoView({behavior:reduce?'auto':'smooth'}),0);}
 }
 
 /* ---------------- events ---------------- */
@@ -327,7 +327,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('button,[data-ope
  const a=d.act;if(!a)return;
  const ACT={voice:runVoice,next:saveNext,print:printView,wa:waView,close:closeModal,'real-print':()=>window.print(),'sample-shot':sampleShot,'intake-history':()=>intakeTo('history'),'intake-rx':()=>intakeTo('rx'),'play-chat':playChat,'reset-chat':()=>{S.chat=[];S.chatDone=false;vIntake();},
   'chat-to-queue':()=>{const ap=S.appts.find(x=>x.name==='Kavita Sharma');if(ap&&ap.status==='booked'){arrive(ap.id);const p=S.patients.at(-1);p.cond=['Hypothyroid'];p.age=38;p.co='Fatigue and hair fall for 2 weeks. TSH 7.8 (high).';p.rx.co=p.co;p.rx.inv=['TSH'];}else toast('Already in the queue');},
-  logout:()=>{store.set('arx-auth',false);location.hash='#/';toast('Logged out');},
+  logout:()=>{store.set('arx-auth',false);location.hash='#top';toast('Logged out');},
   reset:()=>{const lh=S.lh;S=seed();S.lh=lh;chatLog=[];vOpd();toast('Demo reset');},
   'lh-reset':()=>{S.lh=Object.assign({},LH0);store.set('arx-lh',{});vSettings();}};
  if(ACT[a])ACT[a]();
@@ -347,7 +347,7 @@ $('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();}
 $('#themeBtn').addEventListener('click',()=>setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
 $('#menuBtn').addEventListener('click',()=>{const n=$('#nav');n.classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',String(n.classList.contains('open')));});
 $('#creditBtn').addEventListener('click',()=>{const p=$('#creditPop');p.hidden=!p.hidden;$('#creditBtn').setAttribute('aria-expanded',String(!p.hidden));});
-$('#loginForm').addEventListener('submit',e=>{e.preventDefault();store.set('arx-auth',true);toast(LANG==='hi'?'लॉग इन हो गया':'Logged in to the demo clinic');location.hash='#/app/home';});
+$('#loginForm').addEventListener('submit',e=>{e.preventDefault();store.set('arx-auth',true);toast(LANG==='hi'?'लॉग इन हो गया':'Logged in to the demo clinic');location.hash='#app-home';});
 $('#leadForm').addEventListener('submit',e=>{e.preventDefault();const n=$('#lf-name').value,c=$('#lf-clinic').value,ph=$('#lf-phone').value,pt=$('#lf-pts').value;
  const msg=`Hello Chiranjeev, I'd like an Arogya Rx demo.\nDoctor: ${n}\nClinic: ${c}\nMobile: ${ph}\nPatients per day: ${pt}`;
  const done=$('#leadDone');done.hidden=false;done.innerHTML=`<span>${esc(t('form.done'))}</span><span style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn primary sm" href="https://wa.me/919546519953?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">WhatsApp</a><a class="btn sm" href="mailto:chiranjeevkumar47@gmail.com?subject=${encodeURIComponent('Arogya Rx demo request')}&body=${encodeURIComponent(msg)}">Email</a></span>`;});
