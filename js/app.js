@@ -19,6 +19,7 @@ function applyLang(){
  $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===LANG?'true':'false'));
  renderLanding();
  if(!$('#page-app').hidden)renderApp();
+ document.dispatchEvent(new Event('arx:lang'));
 }
 function setLang(l){LANG=l;try{localStorage.setItem('arx-lang',l);}catch(e){}applyLang();}
 function setTheme(th){document.documentElement.setAttribute('data-theme',th);try{localStorage.setItem('arx-theme',th);}catch(e){}
@@ -26,18 +27,38 @@ function setTheme(th){document.documentElement.setAttribute('data-theme',th);try
 
 /* ---------------- landing ---------------- */
 let ff='all',bill='m';
+const OPEN=new Set();   // ids of expanded panels, kept across re-renders
+const disc=(id,inner)=>`<div class="disc${OPEN.has(id)?' open':''}" id="${id}"${OPEN.has(id)?'':' inert'}><div class="disc-in">${inner}</div></div>`;
+const hiOr=(en,hi)=>LANG==='hi'?hi:en;
+const BENTO=[[0,'b1','lh'],[7,'b2','hindi'],[8,'b3','gen'],[9,'b4','allergy'],[12,'b5','voice'],[13,'b6','photo']];
+function bentoViz(k){
+ if(k==='lh')return `<div class="mini-lh"><div class="mlh-hi">सिन्हा क्लिनिक</div><div class="mlh-en">SINHA CLINIC</div><div class="mlh-doc">Dr. Rakesh Sinha · MBBS, MD</div><div class="mlh-rule"></div><div class="mlh-body"><span class="mlh-rx">℞</span><div class="mlh-lines"><i></i><i></i><i></i><i></i><i></i></div></div></div><div class="inks"><i></i><i></i><i></i><i></i></div>`;
+ if(k==='hindi')return `<div class="morph"><span class="m1 mono">1 – 0 – 1 · after food · 5 days</span><span class="m2">सुबह और रात · खाने के बाद · 5 दिन</span></div>`;
+ if(k==='gen')return `<div class="bars"><div class="bar br"><span>${esc(t('viz.branded'))}</span><i></i><b class="mono">₹312</b></div><div class="bar ja"><span>${esc(t('viz.ja'))}</span><i></i><b class="mono">₹96</b></div><small>${esc(t('viz.sample'))}</small></div>`;
+ if(k==='allergy')return `<div class="shield"><span class="rip"></span><span class="rip r2"></span>${svg('shield')}<span class="blk">${esc(t('viz.blocked'))}</span></div>`;
+ if(k==='voice')return `<div class="vwave">${Array.from({length:28},(_,i)=>`<i style="--k:${(i*37)%11}"></i>`).join('')}</div><div class="vtx mono"><span>bukhar teen din se · PCM 650 SOS</span></div>`;
+ if(k==='photo')return `<div class="pdoc"><i></i><i></i><i></i><i></i><i></i><span class="pscan"></span></div><div class="pchips mono"><span>HbA1c 7.2%</span><span>FBS 132</span><span>Hb 9.1</span></div>`;
+ return '';}
 function renderLanding(){
  const F=X.FEATURES;
  ['all','live','pilot','road'].forEach(k=>{const el=$('#fc-'+k);if(el)el.textContent=k==='all'?F.length:F.filter(f=>f.st===k).length;});
+ const tot=$('#fc-total');if(tot)tot.textContent=F.length;
  const stLbl={live:t('feat.live'),pilot:t('feat.pilot'),road:t('feat.road')},stCls={live:'good',pilot:'acc',road:'warn'};
- $('#fgrid').innerHTML=F.filter(f=>ff==='all'||f.st===ff).map((f,i)=>`<article class="fcard"><div class="top-row"><span class="ic">${svg(f.ic)}</span><span class="tag ${stCls[f.st]}">${esc(stLbl[f.st])}</span></div><h3>${esc(L(f.t))}</h3><p>${esc(L(f.d))}</p><div class="phase">${esc(f.ph)}</div></article>`).join('');
- $('#road').innerHTML=X.ROADMAP.map(r=>`<div class="phase-card ${r.now?'now':''}">${r.now?`<span class="tag acc" style="align-self:flex-start">${LANG==='hi'?'अभी':'Now'}</span>`:''}<div class="when">${esc(r.when)}</div><h3>${esc(L(r.t))}</h3><ul>${L(r.items).map(i=>`<li>${esc(i)}</li>`).join('')}</ul><div class="gate">${esc(L(r.gate))}</div></div>`).join('');
- $('#plans').innerHTML=X.PLANS.map(p=>{const price=bill==='m'?p.m:p.y;const per=bill==='m'?(LANG==='hi'?'/ महीना':'/ month'):(LANG==='hi'?'/ साल':'/ year');
-  return `<div class="plan ${p.feat?'feat':''}">${p.feat?`<span class="tag acc" style="align-self:flex-start">${LANG==='hi'?'ज़्यादातर क्लिनिक':'Most clinics'}</span>`:''}<h3>${esc(L(p.t))}</h3><div class="price">₹${price.toLocaleString('en-IN')}<small> ${price?per:''}${p.per?(LANG==='hi'?' प्रति डॉक्टर':' per doctor'):''}</small></div><ul>${L(p.items).map(i=>`<li>${esc(i)}</li>`).join('')}</ul><p class="note">${esc(L(p.note))}</p><a class="btn ${p.feat?'primary':''}" href="${p.m?'#contact':'#login'}">${p.m?(LANG==='hi'?'डेमो विज़िट माँगें':'Book a demo visit'):(LANG==='hi'?'मुफ़्त शुरू करें':'Start free')}</a></div>`;}).join('');
- $('#teamGrid').innerHTML=X.TEAM.map(m=>`<div class="member"><span class="pic">${esc(m.ini)}</span><h3>${esc(m.name)}</h3><div class="role">${esc(L(m.role))}</div><p>${esc(L(m.bio))}</p><div class="links">${m.links.map(l=>`<a class="btn sm" href="${l[1]}" ${l[1].startsWith('http')||l[1].endsWith('.pdf')?'target="_blank" rel="noopener"':''}>${esc(l[0])}</a>`).join('')}</div></div>`).join('');
- $('#faqGrid').innerHTML=X.FAQ.map(q=>`<details><summary>${esc(L(q[0]))}</summary><p>${esc(L(q[1]))}</p></details>`).join('');
+ const mq=$('#mq');if(mq){const row=X.MARQUEE.map(m=>`<span>${esc(L(m))}</span>`).join('');mq.innerHTML=row+row;}
+ $('#bento').innerHTML=BENTO.map(([fi,key,viz],i)=>`<article class="tile t-${key} st" style="--i:${i}"><div class="viz viz-${viz}" aria-hidden="true">${bentoViz(viz)}</div><div class="tile-txt"><h3>${esc(t('bento.'+key+'t'))}</h3><p>${esc(t('bento.'+key+'d'))}</p></div></article>`).join('');
+ $('#flist').innerHTML=F.map((f,idx)=>[f,idx]).filter(([f])=>ff==='all'||f.st===ff).map(([f,idx],i)=>{const id='fd-'+idx,o=OPEN.has(id);
+  return `<div class="frow st" style="--i:${Math.min(i,10)}"><button class="frow-h" type="button" data-disc="${id}" aria-expanded="${o}" aria-controls="${id}"><span class="ic">${svg(f.ic)}</span><span class="t">${esc(L(f.t))}</span><span class="tag ${stCls[f.st]}">${esc(stLbl[f.st])}</span><span class="chev" aria-hidden="true"></span></button>${disc(id,`<p>${esc(L(f.d))}</p><span class="ph mono">${esc(f.ph)}</span>`)}</div>`;}).join('');
+ $('#road').innerHTML=X.ROADMAP.map(r=>`<div class="ph4 ${r.now?'now':''}"><span class="dot" aria-hidden="true"></span><div class="when mono">${esc(r.when)}${r.now?` · <b>${hiOr('Now','अभी')}</b>`:''}</div><h3>${esc(L(r.t))}</h3><ul>${L(r.items).map(i=>`<li>${esc(i)}</li>`).join('')}</ul><div class="gate">${esc(L(r.gate))}</div></div>`).join('');
+ $('#plans').innerHTML=X.PLANS.slice(0,3).map((p,i)=>{const price=bill==='m'?p.m:p.y;const per=bill==='m'?hiOr('/ month','/ महीना'):hiOr('/ year','/ साल');
+  return `<div class="pcard ${p.feat?'feat':''} st" style="--i:${i}">${p.feat?`<span class="ribbon">${hiOr('Most clinics','ज़्यादातर क्लिनिक')}</span>`:''}<h3>${esc(L(p.t))}</h3><div class="pp"><span class="amt">₹${price.toLocaleString('en-IN')}</span><small>${price?per:hiOr('forever','हमेशा')}</small></div><p class="note">${esc(L(p.note))}</p><a class="btn ${p.feat?'primary':''} full" href="${p.m?'#contact':'#login'}">${p.m?hiOr('Book a demo visit','डेमो विज़िट माँगें'):hiOr('Start free','मुफ़्त शुरू करें')}</a>${disc('pl-'+i,`<ul class="checks">${L(p.items).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`)}</div>`;}).join('');
+ $('#teamGrid').innerHTML=X.TEAM.map(m=>`<div class="mem"><span class="pic">${esc(m.ini)}</span><div><h3>${esc(m.name)}</h3><div class="role">${esc(L(m.role))}</div><p>${esc(L(m.bio))}</p>${m.links.length?`<div class="links">${m.links.map(l=>`<a href="${l[1]}" ${l[1].startsWith('http')||l[1].endsWith('.pdf')?'target="_blank" rel="noopener"':''}>${esc(l[0])} →</a>`).join('')}</div>`:''}</div></div>`).join('');
+ $('#faqGrid').innerHTML=X.FAQ.map((q,i)=>{const id='faq-'+i,o=OPEN.has(id);return `<div class="fq"><button class="fq-h" type="button" data-disc="${id}" aria-expanded="${o}" aria-controls="${id}"><span>${esc(L(q[0]))}</span><span class="chev" aria-hidden="true"></span></button>${disc(id,`<p>${esc(L(q[1]))}</p>`)}</div>`;}).join('');
+ const hs=$('#hvSave');if(hs){const p=cur()||S.patients[2];hs.textContent=inr(cost(p.rx).s);}
  renderPapers();
+ document.dispatchEvent(new Event('arx:render'));
 }
+function toggleDisc(b){const open=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',String(open));
+ b.dataset.disc.split(' ').forEach(id=>{if(open)OPEN.add(id);else OPEN.delete(id);const el=document.getElementById(id);if(el){el.classList.toggle('open',open);el.toggleAttribute('inert',!open);}});}
 
 /* ---------------- clinic state ---------------- */
 const FORM={tab:'TAB.',cap:'CAP.',syp:'SYP.',inh:'INH.',sach:'SACHET'};
@@ -294,14 +315,18 @@ function route(){const h=location.hash||'#top';
  const isApp=h.startsWith('#app-'),isLogin=h==='#login';
  $('#page-landing').hidden=isApp||isLogin;$('#page-login').hidden=!isLogin;$('#page-app').hidden=!isApp;$('#footer').hidden=isApp;
  $('#loginBtn').textContent=authed?(LANG==='hi'?'डैशबोर्ड':'Dashboard'):t('nav.login');$('#loginBtn').setAttribute('href',authed?'#app-home':'#login');
- $('#nav').classList.remove('open');
+ $('#nav').classList.remove('open');document.body.classList.toggle('is-landing',!isApp&&!isLogin);
  if(isApp){if(!authed){location.hash='#login';return;}const v=h.slice(5);VIEW=VIEWS.some(x=>x[0]===v)?v:'home';renderApp();window.scrollTo(0,0);}
  else if(isLogin){window.scrollTo(0,0);}
- else if(h.length>1){const el=document.getElementById(h.slice(1));if(el)setTimeout(()=>el.scrollIntoView({behavior:reduce?'auto':'smooth'}),0);}
+ else if(h.length>1){const el=document.getElementById(h.slice(1));
+  if(el){const ab=el.classList.contains('acc-item')&&el.querySelector('.acc-h');if(ab&&ab.getAttribute('aria-expanded')!=='true')toggleDisc(ab);
+   setTimeout(()=>el.scrollIntoView({behavior:reduce?'auto':'smooth'}),0);}}
+ document.dispatchEvent(new Event('arx:route'));
 }
 
 /* ---------------- events ---------------- */
 document.addEventListener('click',e=>{const b=e.target.closest('button,[data-open]');if(!b)return;const d=b.dataset;
+ if(d.disc){toggleDisc(b);return;}
  if(d.lang){setLang(d.lang);return;}
  if(d.ff){ff=d.ff;$$('[data-ff]').forEach(x=>x.classList.toggle('on',x.dataset.ff===ff));renderLanding();return;}
  if(d.bill){bill=d.bill;$$('[data-bill]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.bill===bill?'true':'false'));renderLanding();return;}

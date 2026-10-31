@@ -12,7 +12,7 @@ This repo is the **marketing website and a fully clickable demo app**. Everythin
 
 | Area | What works |
 | --- | --- |
-| Website | English / हिंदी toggle, light / dark theme, feature filter (Live · In pilot · Roadmap), roadmap, monthly/yearly pricing, team, FAQ, a demo-request form that opens WhatsApp or email |
+| Website | A minimal, motion-led landing page: animated hero (a parchi filling itself in, a consult timer, Jan Aushadhi savings and a Hindi WhatsApp message), six feature tiles, three plans, and expanders for depth (all 28 features with a Live · In pilot · Roadmap filter, plan contents, roadmap, team, FAQ). English / हिंदी, light / dark, a demo-request form that opens WhatsApp or email. Motion turns off under the reduced-motion setting. |
 | Home | Today's appointments, KPIs, **Ask Arogya**: plain-language questions over patient records |
 | Schedule | 7-day calendar; add, reschedule, cancel; mark arrived (creates an OPD token) |
 | Intake | WhatsApp booking assistant (simulated chat with a pre-visit summary); photo intake of an old prescription or lab report (upload, drop or sample) |
@@ -28,7 +28,7 @@ This repo is the **marketing website and a fully clickable demo app**. Everythin
 
 ## Stack
 
-A static site with no build step: `index.html`, `css/styles.css`, and `js/` (`i18n.js`, `data.js`, `app.js`). Hash routes: `#top` website, `#login`, `#app-<view>`.
+A static site with no build step: `index.html`, `css/styles.css` (app) and `css/landing.css` (landing page), and `js/` (`i18n.js`, `data.js`, `app.js`, `landing.js` for landing motion). Hash routes: `#top` website, `#login`, `#app-<view>`.
 
 ```bash
 # run locally

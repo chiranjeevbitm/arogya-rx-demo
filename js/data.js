@@ -96,6 +96,10 @@ const FAQ=[
  [{en:'Do I need a computer?',hi:'क्या कंप्यूटर ज़रूरी है?'},{en:'No. It runs in the browser on a laptop, tablet or Android phone, and prints to any printer, including on your existing pre-printed pad.',hi:'नहीं। यह लैपटॉप, टैबलेट या एंड्रॉइड फ़ोन के ब्राउज़र में चलता है, और किसी भी प्रिंटर पर छपता है, आपके छपे हुए पैड पर भी।'}]
 ];
 
+
+/* phrases for the scrolling strip on the landing page */
+const MARQUEE=[['Your own letterhead','आपका अपना letterhead'],['Hindi dose timings','हिंदी में खुराक'],['Generic names in CAPITALS','जेनेरिक नाम बड़े अक्षरों में'],['Jan Aushadhi prices','जन औषधि की कीमतें'],['Allergy checks','एलर्जी जाँच'],['WhatsApp parchi','WhatsApp पर्ची'],['Hinglish voice','हिंग्लिश में बोलकर'],['Photo intake','फ़ोटो से इतिहास'],['Token queue','टोकन कतार'],['HbA1c and BP trends','HbA1c और BP ट्रेंड']].map(m=>({en:m[0],hi:m[1]}));
+
 /* clinical reference data */
 const DRUGS=[
  {id:'pcm650',g:'PARACETAMOL',s:'650 mg',f:'tab',b:'Dolo 650',bp:2.0,jp:0.7,cls:'pcm'},
@@ -174,7 +178,7 @@ const INTAKE_CHAT=[
  ['in','📎 TSH_report.jpg'],
  ['out','धन्यवाद। रिपोर्ट मिल गई। डॉक्टर साहब को आपकी जानकारी पहले से भेज दी गई है। कल मिलते हैं।']
 ];
-window.ARX={svg,FEATURES,ROADMAP,PLANS,TEAM,FAQ,DRUGS,TPL,ADVICE,PATIENTS,INTAKE_CHAT,
+window.ARX={svg,MARQUEE,FEATURES,ROADMAP,PLANS,TEAM,FAQ,DRUGS,TPL,ADVICE,PATIENTS,INTAKE_CHAT,
  INV:['CBC','Dengue NS1','FBS','PPBS','HbA1c','Lipid profile','S. creatinine','Urine R/M','Urine C/S','TSH','S. ferritin','Chest X-ray','ECG'],
  COMPLAINTS:['Fever','Cough','Body ache','Headache','Burning urination','Acidity','Giddiness','Weakness','Sneezing','BP check','Sugar follow-up']};
 })();
