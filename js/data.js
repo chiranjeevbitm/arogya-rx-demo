@@ -56,7 +56,11 @@ const FEATURES=[
  ['pilot','shield','Allergy and duplicate-drug checks','एलर्जी और दोहरी दवा की जाँच','Sulfa or penicillin allergy blocks the save. Two antihistamines or two acid reducers get flagged before they print.','सल्फ़ा या पेनिसिलिन एलर्जी पर पर्ची सेव नहीं होती। दो एंटीहिस्टामिन या दो एसिडिटी की दवा छपने से पहले पकड़ी जाती है।','Phase 2 · try it in the demo'],
  ['pilot','wa','WhatsApp parchi and follow-up reminders','WhatsApp पर पर्ची और फ़ॉलो-अप याद','PDF plus a Hindi dose schedule on the patient’s phone. A reminder the day before follow-up; the patient replies 1 to book.','मरीज़ के फ़ोन पर PDF और हिंदी में दवा का समय। फ़ॉलो-अप से एक दिन पहले याद; मरीज़ 1 लिखकर बुक करता है।','Phase 2 · try it in the demo'],
  ['pilot','queue','Token queue and reception login','टोकन कतार और रिसेप्शन लॉगिन','Your compounder adds name, age and phone. The patient appears in your queue with a token number.','आपका कंपाउंडर नाम, उम्र और फ़ोन डालता है। मरीज़ टोकन नंबर के साथ आपकी कतार में आ जाता है।','Phase 2 · try it in the demo'],
- ['pilot','mic','Speak the consult in Hinglish','हिंग्लिश में बोलकर पर्ची','Talk the way you talk to the patient. A draft prescription appears for you to check. Nothing prints without your confirmation.','जैसे मरीज़ से बात करते हैं वैसे बोलें। पर्ची का ड्राफ़्ट बनता है, आप जाँचें। आपकी मंज़ूरी के बिना कुछ नहीं छपता।','Phase 3 · simulated in the demo'],
+ ['pilot','mic','Listens to the consult, writes the parchi','बातचीत सुनकर पर्ची तैयार','Doctor, patient and compounder talk normally in Hinglish. Complaints, vitals, allergies, diagnosis, medicines, tests and follow-up are picked out live, and a draft parchi appears for you to check.','डॉक्टर, मरीज़ और कंपाउंडर आम हिंग्लिश में बात करते हैं। तकलीफ़, वाइटल्स, एलर्जी, डायग्नोसिस, दवा, जाँच और फ़ॉलो-अप अपने-आप निकलते हैं और पर्ची का ड्राफ़्ट जाँचने के लिए तैयार होता है।','Pilot · in demo'],
+ ['pilot','tap','Type “pcm tds 3d”, get the full line','“pcm tds 3d” लिखें, पूरी लाइन तैयार','Short names, brand names and typos all work. Dose, timing and days are read from the same line, so one Enter adds a complete medicine.','छोटे नाम, ब्रांड नाम और गलत स्पेलिंग भी चलती है। खुराक, समय और दिन उसी लाइन से समझ लिए जाते हैं, एक Enter में पूरी दवा जुड़ जाती है।','Pilot · in demo'],
+ ['pilot','spark','Hindi summary and voice note for the patient','मरीज़ के लिए हिंदी सारांश और वॉइस नोट','After the consult the patient gets a short Hindi summary, the answers to the questions they asked, and a voice note of the dose timings on WhatsApp.','परामर्श के बाद मरीज़ को WhatsApp पर छोटा हिंदी सारांश, उनके सवालों के जवाब और खुराक का वॉइस नोट मिलता है।','Pilot · in demo'],
+ ['pilot','bell','WhatsApp automations','WhatsApp ऑटोमेशन','Booking confirmation, reminders with a reschedule button, “your turn is next”, refill reminders and follow-up recall, each switched on or off by you.','बुकिंग की पुष्टि, दोबारा समय चुनने वाले रिमाइंडर, “आपका नंबर आने वाला है”, दवा खत्म होने से पहले याद और फ़ॉलो-अप, सब आपके हाथ में।','Pilot · in demo'],
+ ['pilot','shield','Interaction, dose and NMC checks','इंटरैक्शन, खुराक और NMC जाँच','Painkiller with a BP medicine, too much paracetamol in a day, missing registration number: each is flagged before the parchi prints.','BP की दवा के साथ दर्द-निवारक, दिन में ज़्यादा पैरासिटामोल, रजिस्ट्रेशन नंबर नहीं: पर्ची छपने से पहले हर चीज़ पकड़ी जाती है।','Pilot · in demo'],
  ['pilot','cam','Photo intake of old prescriptions and lab reports','पुरानी पर्ची और रिपोर्ट की फ़ोटो से इतिहास','Snap the folder the patient brings. Medicines, doses and lab values become structured history in seconds.','मरीज़ जो फ़ाइल लाता है उसकी फ़ोटो लें। दवाइयाँ, खुराक और जाँच के नतीजे सेकंडों में इतिहास बन जाते हैं।','Phase 3 · simulated in the demo'],
  ['pilot','chart','Patient timeline with HbA1c and BP trends','मरीज़ की टाइमलाइन, HbA1c और BP ट्रेंड','Every visit, every scanned report, and a trend line against target for chronic patients.','हर विज़िट, हर स्कैन की गई रिपोर्ट, और पुराने मरीज़ों के लिए लक्ष्य के सामने ट्रेंड लाइन।','Phase 2 · try it in the demo'],
  ['pilot','spark','Ask Arogya: plain-language search','"Ask Arogya": आम भाषा में खोज','"Diabetic patients with HbA1c above 7" or "who is due this week" answered from your own records.','"HbA1c 7 से ऊपर वाले डायबिटीज़ मरीज़" या "इस हफ़्ते किसका फ़ॉलो-अप है" आपके रिकॉर्ड से जवाब।','Phase 3 · try it in the demo'],
@@ -70,7 +74,7 @@ const FEATURES=[
  ['road','gov','Government programme reporting','सरकारी कार्यक्रम रिपोर्टिंग','Auto-fill Nikshay (TB) and HMIS reports from your records, built on our existing Nikshay automation work.','आपके रिकॉर्ड से Nikshay (TB) और HMIS रिपोर्ट अपने-आप भरें, हमारे मौजूदा Nikshay ऑटोमेशन पर आधारित।','Phase 4 · 2027'],
  ['road','lang','More languages: Bhojpuri, Maithili, Bengali, Urdu','और भाषाएँ: भोजपुरी, मैथिली, बांग्ला, उर्दू','Dose instructions and WhatsApp messages in the language your patient reads best.','दवा का समय और WhatsApp संदेश उस भाषा में जो मरीज़ सबसे अच्छी तरह पढ़ता है।','Phase 4 · 2027'],
  ['road','video','Doctor in 10 minutes: teleconsult','10 मिनट में डॉक्टर: टेली-परामर्श','WhatsApp video consults with UPI payment and an e-prescription that follows the Telemedicine Practice Guidelines.','WhatsApp वीडियो परामर्श, UPI भुगतान और टेलीमेडिसिन दिशानिर्देशों के अनुसार ई-पर्ची।','Phase 4 · 2027'],
- ['road','bell','Chronic-care recall campaigns','पुराने मरीज़ों के लिए रिकॉल अभियान','Find every diabetic overdue for HbA1c or every hypertensive who missed follow-up, and remind them in one click.','HbA1c जाँच से छूटे हर डायबिटीज़ मरीज़ या फ़ॉलो-अप भूले हर BP मरीज़ को एक क्लिक में याद दिलाएँ।','Phase 4 · 2027'],
+ ['pilot','users','Chronic-care recall campaigns','पुराने मरीज़ों के लिए रिकॉल अभियान','Find every diabetic overdue for HbA1c or every hypertensive who missed follow-up, and remind them in one click.','HbA1c जाँच से छूटे हर डायबिटीज़ मरीज़ या फ़ॉलो-अप भूले हर BP मरीज़ को एक क्लिक में याद दिलाएँ।','Phase 4 · 2027'],
  ['pilot','lock','Clinic-only access and security','सिर्फ़ आपके क्लिनिक की पहुँच और सुरक्षा','Records are locked to your clinic. A login per staff member with doctor, reception and admin roles, an activity log that cannot be edited, data stored in India and encrypted.','रिकॉर्ड सिर्फ़ आपके क्लिनिक तक सीमित। हर स्टाफ़ का अलग लॉगिन (डॉक्टर, रिसेप्शन, एडमिन), ऐसा ऑडिट लॉग जो बदला नहीं जा सकता, डेटा भारत में और एन्क्रिप्टेड।','Phase 1 · Nov 2026'],
  ['road','shield','OTP login, backups and DPDP consent','OTP लॉगिन, बैकअप और DPDP सहमति','A one-time code on your mobile at login, daily backups, and patient consent records with data export under the DPDP Act.','लॉगिन पर मोबाइल OTP, रोज़ का बैकअप, और DPDP कानून के अनुसार मरीज़ की सहमति का रिकॉर्ड व डेटा निर्यात।','Phase 1–2 · Nov–Dec 2026']
 ].map(f=>({st:f[0],ic:f[1],t:{en:f[2],hi:f[3]},d:{en:f[4],hi:f[5]},ph:f[6]}));
@@ -84,8 +88,8 @@ const ROADMAP=[
 
 const PLANS=[
  {t:{en:'Free',hi:'मुफ़्त'},m:0,y:0,items:{en:['1 doctor, 100 prescriptions a month','Standard letterhead','Print and PDF'],hi:['1 डॉक्टर, महीने में 100 पर्ची','सामान्य letterhead','प्रिंट और PDF']},note:{en:'Try it on a slow day.',hi:'किसी हल्के दिन आज़माएँ।'}},
- {feat:true,t:{en:'Clinic',hi:'क्लिनिक'},m:499,y:4999,items:{en:['Unlimited prescriptions','Your exact letterhead','Hindi dose instructions','WhatsApp parchi (500 a month)','Templates and follow-up reminders','1 reception login'],hi:['असीमित पर्ची','आपका हूबहू letterhead','हिंदी में खुराक','WhatsApp पर्ची (महीने में 500)','टेम्पलेट और फ़ॉलो-अप याद','1 रिसेप्शन लॉगिन']},note:{en:'For a solo GP seeing 30–80 patients a day.',hi:'रोज़ 30–80 मरीज़ देखने वाले डॉक्टर के लिए।'}},
- {t:{en:'Clinic Pro',hi:'क्लिनिक प्रो'},m:999,y:9999,items:{en:['Everything in Clinic','Voice to prescription','Photo intake of old Rx and reports','WhatsApp booking assistant','Token screen and billing','3 staff logins'],hi:['क्लिनिक की सभी सुविधाएँ','बोलकर पर्ची','पुरानी पर्ची और रिपोर्ट की फ़ोटो','WhatsApp बुकिंग सहायक','टोकन स्क्रीन और बिलिंग','3 स्टाफ़ लॉगिन']},note:{en:'For OPDs above 60 patients a day.',hi:'रोज़ 60 से ज़्यादा मरीज़ वाले OPD के लिए।'}},
+ {feat:true,t:{en:'Clinic',hi:'क्लिनिक'},m:499,y:4999,items:{en:['Unlimited prescriptions','Your exact letterhead','Shorthand medicine entry','Hindi dose instructions','WhatsApp parchi and reminders (500 a month)','Templates and follow-up reminders','1 reception login'],hi:['असीमित पर्ची','आपका हूबहू letterhead','छोटे नाम से दवा','हिंदी में खुराक','WhatsApp पर्ची और रिमाइंडर (महीने में 500)','टेम्पलेट और फ़ॉलो-अप याद','1 रिसेप्शन लॉगिन']},note:{en:'For a solo GP seeing 30–80 patients a day.',hi:'रोज़ 30–80 मरीज़ देखने वाले डॉक्टर के लिए।'}},
+ {t:{en:'Clinic Pro',hi:'क्लिनिक प्रो'},m:999,y:9999,items:{en:['Everything in Clinic','Listens to the consult and drafts the parchi','Photo intake of old Rx and reports','WhatsApp booking, automations and recall','Hindi voice notes for patients','Token screen and billing','3 staff logins'],hi:['क्लिनिक की सभी सुविधाएँ','बातचीत सुनकर पर्ची का ड्राफ़्ट','पुरानी पर्ची और रिपोर्ट की फ़ोटो','WhatsApp बुकिंग, ऑटोमेशन और रिकॉल','मरीज़ों के लिए हिंदी वॉइस नोट','टोकन स्क्रीन और बिलिंग','3 स्टाफ़ लॉगिन']},note:{en:'For OPDs above 60 patients a day.',hi:'रोज़ 60 से ज़्यादा मरीज़ वाले OPD के लिए।'}},
  {t:{en:'Nursing home',hi:'नर्सिंग होम'},m:799,y:7999,per:true,items:{en:['Per doctor, 2–5 doctors','Shared patients','Per-doctor letterheads','Admin reports'],hi:['प्रति डॉक्टर, 2–5 डॉक्टर','साझा मरीज़','हर डॉक्टर का letterhead','एडमिन रिपोर्ट']},note:{en:'Talk to us for hospitals.',hi:'अस्पतालों के लिए हमसे बात करें।'}}
 ];
 
@@ -101,6 +105,8 @@ const FAQ=[
  [{en:'What if the internet goes down?',hi:'इंटरनेट चला जाए तो?'},{en:'The offline mode (Phase 2) keeps prescriptions and printing working. Everything syncs and WhatsApp messages go out when the connection returns.',hi:'ऑफ़लाइन मोड (चरण 2) में पर्ची और प्रिंट चलते रहते हैं। कनेक्शन लौटने पर सब सिंक हो जाता है और WhatsApp संदेश चले जाते हैं।'}],
  [{en:'Can my compounder use it?',hi:'क्या मेरा कंपाउंडर इसे चला पाएगा?'},{en:'The reception screen has only name, age, phone and complaint. It creates the token and the patient appears in your queue.',hi:'रिसेप्शन स्क्रीन में केवल नाम, उम्र, फ़ोन और तकलीफ़। टोकन बनता है और मरीज़ आपकी कतार में आ जाता है।'}],
  [{en:'Does the AI decide the treatment?',hi:'क्या AI इलाज तय करता है?'},{en:'No. Voice and photo intake create drafts and suggestions. The doctor reviews every line and nothing prints without the doctor’s confirmation.',hi:'नहीं। आवाज़ और फ़ोटो से केवल ड्राफ़्ट और सुझाव बनते हैं। डॉक्टर हर पंक्ति जाँचते हैं, उनकी मंज़ूरी के बिना कुछ नहीं छपता।'}],
+ [{en:'Does it record my patients?',hi:'क्या यह मरीज़ों को रिकॉर्ड करता है?'},{en:'Only when you press Listen, and only after the patient agrees. The audio is turned into text and then discarded; only the text you approve is saved to the record.',hi:'सिर्फ़ तब जब आप Listen दबाएँ, और मरीज़ की सहमति के बाद। आवाज़ से टेक्स्ट बनता है और फिर आवाज़ हटा दी जाती है; रिकॉर्ड में सिर्फ़ वही सेव होता है जो आप मंज़ूर करें।'}],
+ [{en:'How does it compare with other clinic apps?',hi:'दूसरे क्लिनिक ऐप से यह कैसे अलग है?'},{en:'Most clinic apps start when the doctor starts typing. Arogya Rx starts before the visit on WhatsApp, listens during it, and follows up in Hindi after it, at about a third of the usual yearly price.',hi:'ज़्यादातर क्लिनिक ऐप तब शुरू होते हैं जब डॉक्टर टाइप करना शुरू करते हैं। Arogya Rx मुलाक़ात से पहले WhatsApp पर, मुलाक़ात के दौरान सुनकर और बाद में हिंदी में फ़ॉलो-अप तक काम करता है, आम सालाना कीमत के लगभग एक-तिहाई में।'}],
  [{en:'Do I need a computer?',hi:'क्या कंप्यूटर ज़रूरी है?'},{en:'No. It runs in the browser on a laptop, tablet or Android phone, and prints to any printer, including on your existing pre-printed pad.',hi:'नहीं। यह लैपटॉप, टैबलेट या एंड्रॉइड फ़ोन के ब्राउज़र में चलता है, और किसी भी प्रिंटर पर छपता है, आपके छपे हुए पैड पर भी।'}]
 ];
 
@@ -123,7 +129,7 @@ const SECURITY=[
 ].map(f=>({st:f[0],ic:f[1],t:{en:f[2],hi:f[3]},d:{en:f[4],hi:f[5]}}));
 
 /* phrases for the scrolling strip on the landing page */
-const MARQUEE=[['Your own letterhead','आपका अपना letterhead'],['Hindi dose timings','हिंदी में खुराक'],['Generic names in CAPITALS','जेनेरिक नाम बड़े अक्षरों में'],['Jan Aushadhi prices','जन औषधि की कीमतें'],['Allergy checks','एलर्जी जाँच'],['WhatsApp parchi','WhatsApp पर्ची'],['Hinglish voice','हिंग्लिश में बोलकर'],['Photo intake','फ़ोटो से इतिहास'],['Token queue','टोकन कतार'],['HbA1c and BP trends','HbA1c और BP ट्रेंड']].map(m=>({en:m[0],hi:m[1]}));
+const MARQUEE=[['Your own letterhead','आपका अपना letterhead'],['Hindi dose timings','हिंदी में खुराक'],['Generic names in CAPITALS','जेनेरिक नाम बड़े अक्षरों में'],['Jan Aushadhi prices','जन औषधि की कीमतें'],['Allergy checks','एलर्जी जाँच'],['WhatsApp parchi','WhatsApp पर्ची'],['Listens to the consult','बातचीत सुनकर पर्ची'],['pcm tds 3d','pcm tds 3d'],['Hindi voice notes','हिंदी वॉइस नोट'],['Photo intake','फ़ोटो से इतिहास'],['Token queue','टोकन कतार'],['HbA1c and BP trends','HbA1c और BP ट्रेंड']].map(m=>({en:m[0],hi:m[1]}));
 
 /* clinical reference data */
 const DRUGS=[
@@ -170,7 +176,8 @@ const TPL={
 };
 const ADVICE=[
  {en:'Rest and plenty of fluids',hi:'आराम करें, खूब पानी पिएँ'},{en:'Low salt, no fried food',hi:'नमक कम, तली चीज़ें बंद'},{en:'Walk 30 minutes daily',hi:'रोज़ 30 मिनट टहलें'},{en:'Avoid spicy food and late dinner',hi:'तीखा खाना और देर रात खाना बंद'},
- {en:'Steam inhalation twice daily',hi:'दिन में दो बार भाप लें'},{en:'Drink 3 litres of water daily',hi:'रोज़ 3 लीटर पानी पिएँ'},{en:'Check sugar at home every week',hi:'हर हफ़्ते घर पर शुगर जाँचें'},{en:'Iron-rich diet: greens, jaggery, chana',hi:'हरी सब्ज़ी, गुड़, चना खाएँ'}
+ {en:'Steam inhalation twice daily',hi:'दिन में दो बार भाप लें'},{en:'Drink 3 litres of water daily',hi:'रोज़ 3 लीटर पानी पिएँ'},{en:'Check sugar at home every week',hi:'हर हफ़्ते घर पर शुगर जाँचें'},{en:'Iron-rich diet: greens, jaggery, chana',hi:'हरी सब्ज़ी, गुड़, चना खाएँ'},
+ {en:'Check both feet daily; never walk barefoot',hi:'रोज़ दोनों पैर देखें; नंगे पैर न चलें'},{en:'No painkillers other than paracetamol',hi:'पैरासिटामोल के अलावा कोई दर्द की दवा नहीं'},{en:'Take iron 1 hour away from tea',hi:'आयरन की गोली चाय से 1 घंटा दूर लें'},{en:'Come at once if vomiting, bleeding or drowsy',hi:'उल्टी, खून आना या बेहोशी लगे तो तुरंत आएँ'}
 ];
 const PATIENTS=[
  {tok:1,name:'Anil Kumar',age:40,sex:'M',phone:'98xxxx2210',uhid:'SC-0388',status:'done',time:34,co:'Fever, chills',cond:[],all:[],tpl:'fever',v:{bp:'122/80',pulse:'98',temp:'100.8',spo2:'98',wt:'68'},slot:'08:10',src:'Walk-in'},
@@ -203,7 +210,116 @@ const INTAKE_CHAT=[
  ['in','📎 TSH_report.jpg'],
  ['out','धन्यवाद। रिपोर्ट मिल गई। डॉक्टर साहब को आपकी जानकारी पहले से भेज दी गई है। कल मिलते हैं।']
 ];
+
+/* more medicines, so shorthand search has something to chew on */
+DRUGS.push(
+ {id:'ofl200',g:'OFLOXACIN',s:'200 mg',f:'tab',b:'Zanocin 200',bp:6,jp:1.2,cls:'fq'},
+ {id:'doxy100',g:'DOXYCYCLINE',s:'100 mg',f:'cap',b:'Doxt-SL',bp:6,jp:1.5,cls:'tet'},
+ {id:'cefpo200',g:'CEFPODOXIME',s:'200 mg',f:'tab',b:'Cepodem 200',bp:18,jp:4,cls:'ceph'},
+ {id:'losar50',g:'LOSARTAN',s:'50 mg',f:'tab',b:'Losar 50',bp:5,jp:0.6,cls:'arb'},
+ {id:'meto25',g:'METOPROLOL SUCCINATE ER',s:'25 mg',f:'tab',b:'Met XL 25',bp:6,jp:1.0,cls:'bb'},
+ {id:'asp75',g:'ASPIRIN',s:'75 mg',f:'tab',b:'Ecosprin 75',bp:0.6,jp:0.2,cls:'antiplt'},
+ {id:'clop75',g:'CLOPIDOGREL',s:'75 mg',f:'tab',b:'Clopilet 75',bp:7,jp:0.9,cls:'antiplt'},
+ {id:'ome20',g:'OMEPRAZOLE',s:'20 mg',f:'cap',b:'Omez 20',bp:5,jp:0.7,cls:'ppi'},
+ {id:'alb400',g:'ALBENDAZOLE',s:'400 mg',f:'tab',b:'Zentel',bp:12,jp:3,cls:'anth'},
+ {id:'flu150',g:'FLUCONAZOLE',s:'150 mg',f:'tab',b:'Forcan 150',bp:15,jp:3,cls:'az'},
+ {id:'pred10',g:'PREDNISOLONE',s:'10 mg',f:'tab',b:'Wysolone 10',bp:1.2,jp:0.3,cls:'ster'},
+ {id:'mont10',g:'MONTELUKAST',s:'10 mg',f:'tab',b:'Montair 10',bp:13,jp:2,cls:'lt'}
+);
+/* short names doctors actually type: brand stems, abbreviations, Hindi-ish nicknames */
+const ALIAS={pcm650:['pcm','para','dolo','crocin','calpol'],cet10:['cet','cetz','okacet','alerid'],levo5:['levocet','lcz'],montlevo:['mont','montair lc','mlc','montek'],panto40:['pan','panto','pantop'],rabdsr:['rab','rabe','dsr','razo'],amoxclav:['amox','augmentin','aug','clav','amc'],azi500:['azi','azee','azithral','azith'],cefix200:['cef','cefix','taxim','zifi'],nitro100:['nitro','martifur','nf'],cotri:['cotri','septran','sxt','bactrim'],ors:['ors','electral'],amlo5:['amlo','amlong','aml'],telmi40:['telmi','telma','tel'],met500:['met','metf','glycomet','mf'],glim1:['glim','glimi','amaryl'],ator10:['ator','atorva','statin'],thy50:['thy','thyro','thyronorm','eltroxin'],salb:['salb','asthalin','sal'],ibu400:['ibu','brufen'],diclopcm:['diclo','dicloran'],ond4:['ond','emeset','zofer'],dicymef:['mef','meftal','spas'],ferro:['iron','orofer','fe'],vitd:['d3','vitd','uprise','60k'],calc:['cal','shelcal','calcium'],dom10:['dom','domstal'],coughls:['ascoril','cough','ls'],bcomp:['bcom','becosules','b12'],metro400:['metro','flagyl'],ofl200:['oflox','oflo','zanocin'],doxy100:['doxy','doxt'],cefpo200:['cefpo','cepodem'],losar50:['losar','los'],meto25:['meto','metxl'],asp75:['asp','ecosprin'],clop75:['clop','clopi'],ome20:['ome','omez'],alb400:['alb','zentel'],flu150:['fluco','forcan'],pred10:['pred','wysolone'],mont10:['monte','montair']};
+DRUGS.forEach(d=>{d.al=ALIAS[d.id]||[];});
+/* the doctor's most-used medicines, shown as one-tap chips */
+const FAVS=['pcm650','azi500','panto40','cet10','met500','telmi40','amlo5','ors'];
+
+/* ambient consult scripts: [speaker, words, facts]. Speakers: D doctor, P patient, S compounder.
+   Facts: co complaint · hx history · v vital · all allergy · dx diagnosis · med [id,freq,timing,days] · inv test · adv advice index · fu days · ask [question en, answer en, answer hi] · flag safety note */
+const CONVO={
+ 3:[['D','Namaste Ramesh ji, baithiye. Sugar ki dawa theek se chal rahi hai?',[]],
+  ['P','Haan doctor sahab, dono time le raha hoon. Par do mahine se pairon mein jhunjhuni hoti hai, raat ko zyada.',[['co','Tingling in both feet for 2 months, worse at night']]],
+  ['D','Sunnapan bhi hai? Chot lage to pata chalta hai?',[]],
+  ['P','Thoda sunn lagta hai. Pichhle hafte chappal mein kaanta chubha, pata hi nahi chala.',[['hx','Numbness; did not feel a thorn last week']]],
+  ['S','Sir, BP 138 by 86, pulse 82, random sugar 186, weight 74 kilo.',[['v','bp','138/86'],['v','pulse','82'],['v','grbs','186'],['v','wt','74']]],
+  ['D','HbA1c 7.2 aaya hai, pehle se behtar. Ye sugar ki wajah se shuruaati neuropathy hai.',[['dx','Type 2 DM with early peripheral neuropathy']]],
+  ['D','Metformin SR 500 subah shaam khane ke baad, glimepiride 1 mg subah nashte se pehle, atorvastatin 10 raat ko, aur B-complex subah. Ek mahina.',[['med','met500','1-0-1','after',30],['med','glim1','1-0-0','before',30],['med','ator10','0-0-1','after',30],['med','bcomp','1-0-0','after',30]]],
+  ['P','Doctor sahab, mithai bilkul band karni padegi?',[['ask','Do I have to stop sweets completely?','Not completely, but not every day. A small piece after a meal now and then is fine.','पूरी तरह नहीं, पर रोज़ नहीं। कभी-कभी खाने के बाद थोड़ा सा ले सकते हैं।']]],
+  ['D','Bilkul band nahi, par roz nahi. Kabhi kabhi khane ke baad thoda sa. Roz aadha ghanta paidal chaliye, aur pairon ko roz dekhiye, nange pair mat chaliye.',[['adv',2],['adv',8]]],
+  ['D','FBS, PPBS, HbA1c aur lipid profile karwa ke ek mahine baad aaiye.',[['inv','FBS'],['inv','PPBS'],['inv','HbA1c'],['inv','Lipid profile'],['fu',30]]]],
+ 4:[['D','Kya takleef hai Sita ji?',[]],
+  ['P','Do din se peshab mein jalan hai, baar baar jaana padta hai.',[['co','Burning urination and frequency for 2 days']]],
+  ['D','Bukhar ya kamar mein dard?',[]],
+  ['P','Nahi, bukhar nahi hai. Kamar bhi theek hai.',[['hx','No fever, no flank pain']]],
+  ['S','BP 124 by 80, temperature 98.8.',[['v','bp','124/80'],['v','temp','98.8']]],
+  ['D','Pehle kisi dawa se reaction hua hai kabhi?',[]],
+  ['P','Haan, Septran khayi thi to poore sharir mein daane nikal aaye the.',[['all','Sulfa'],['flag','Reaction to Septran (sulfa) recorded. Co-trimoxazole will be blocked for this patient.']]],
+  ['D','Theek hai, wo nahi denge. Ye lower UTI hai.',[['dx','Lower urinary tract infection']]],
+  ['D','Nitrofurantoin 100 subah shaam khane ke baad paanch din. Dard ho to paracetamol. Urine routine aur culture karwa lijiye.',[['med','nitro100','1-0-1','after',5],['med','pcm650','SOS','after',3],['inv','Urine R/M'],['inv','Urine C/S']]],
+  ['P','Paani kitna peena hai?',[['ask','How much water should I drink?','About 3 litres a day.','रोज़ लगभग 3 लीटर।']]],
+  ['D','Roz teen litre. Paanch din baad dikhaiye.',[['adv',5],['fu',5]]]],
+ 5:[['D','Kab se bukhar hai Arif?',[]],
+  ['P','Teen din se. Badan dard hai aur gale mein kharash.',[['co','Fever for 3 days, body ache, sore throat']]],
+  ['D','Ulti, dast, kahin se khoon, pet mein dard?',[]],
+  ['P','Nahi, bas kamzori lag rahi hai.',[['hx','No vomiting, bleeding or abdominal pain']]],
+  ['S','Temp 101.2, pulse 96, BP 118 by 76, oxygen 98.',[['v','temp','101.2'],['v','pulse','96'],['v','bp','118/76'],['v','spo2','98']]],
+  ['D','Viral fever lag raha hai. Dengue ka mausam hai, CBC aur NS1 karwa lijiye.',[['dx','Acute febrile illness (viral), dengue to be ruled out'],['inv','CBC'],['inv','Dengue NS1']]],
+  ['D','Paracetamol 650 teen baar khane ke baad teen din, cetirizine raat ko paanch din, aur ORS.',[['med','pcm650','1-1-1','after',3],['med','cet10','0-0-1','after',5],['med','ors','SOS','any',3]]],
+  ['P','Dard ke liye ibuprofen le sakta hoon?',[['ask','Can I take ibuprofen for the pain?','No. Until dengue is ruled out, take only paracetamol.','नहीं। डेंगू की जाँच आने तक सिर्फ़ पैरासिटामोल लें।'],['flag','Avoid NSAIDs until dengue is ruled out.']]],
+  ['D','Nahi, report aane tak sirf paracetamol. Aaram, khoob paani. Ulti ya khoon dikhe to turant aaiye. Teen din baad report ke saath.',[['adv',9],['adv',0],['adv',11],['fu',3]]]],
+ 6:[['D','Batayiye Sunita ji.',[]],
+  ['P','Ek mahine se kamzori hai, uthne par chakkar aata hai.',[['co','Weakness and giddiness for a month']]],
+  ['D','Periods kaise hain?',[]],
+  ['P','Kaafi zyada bleeding hoti hai, saat din tak.',[['hx','Heavy menstrual bleeding, 7 days']]],
+  ['S','BP 104 by 68, pulse 92.',[['v','bp','104/68'],['v','pulse','92']]],
+  ['D','Aankhein aur nakhun pale hain. Khoon ki kami lag rahi hai.',[['dx','Iron deficiency anaemia']]],
+  ['D','Ferrous ascorbate folic acid dopahar khane ke baad teen mahine, vitamin D3 60K hafte mein ek baar aath hafte. CBC aur ferritin.',[['med','ferro','0-1-0','after',90],['med','vitd','Weekly','after',56],['inv','CBC'],['inv','S. ferritin']]],
+  ['P','Ye goli chai ke saath le sakti hoon?',[['ask','Can I take the tablet with tea?','Keep it an hour away from tea; take it with water or lemon water.','चाय से 1 घंटा दूर लें; पानी या नींबू-पानी के साथ।']]],
+  ['D','Chai se ek ghanta door. Hari sabzi, gud, chana khaiye. Gynae se bhi dikhwa lijiye. Ek mahine baad aaiye.',[['adv',10],['adv',7],['flag','Referral: gynaecology review for heavy bleeding.'],['fu',30]]]],
+ 7:[['D','Rajesh ji, BP ki dawa le rahe hain?',[]],
+  ['P','Subah sir mein dard rehta hai. Dawa kabhi kabhi bhool jaata hoon.',[['co','Morning headache'],['hx','Misses BP medicine on some days']]],
+  ['S','BP 152 by 94, pulse 78.',[['v','bp','152/94'],['v','pulse','78']]],
+  ['D','BP control mein nahi hai. Telmisartan 40 subah, amlodipine 5 raat ko, ek mahina. Creatinine aur lipid profile.',[['dx','Essential hypertension, uncontrolled'],['med','telmi40','1-0-0','any',30],['med','amlo5','0-0-1','any',30],['inv','S. creatinine'],['inv','Lipid profile']]],
+  ['P','Dawa yaad kaise rahegi?',[['ask','How will I remember the medicine?','A WhatsApp reminder will come every morning.','हर सुबह WhatsApp पर याद दिलाया जाएगा।'],['flag','Daily WhatsApp dose reminder switched on.']]],
+  ['D','Roz subah WhatsApp par yaad dilayenge. Namak kam. Ek mahine baad.',[['adv',1],['fu',30]]]],
+ 8:[['D','Kya hua Pooja?',[]],
+  ['P','Teen din se chheenk aa rahi hai, naak beh rahi hai, aankhon mein khujli.',[['co','Sneezing, runny nose and itchy eyes for 3 days']]],
+  ['S','Temperature normal, 98.4.',[['v','temp','98.4']]],
+  ['D','Allergic rhinitis hai. Montelukast levocetirizine raat ko das din. Bhaap lijiye.',[['dx','Allergic rhinitis'],['med','montlevo','0-0-1','after',10],['adv',4]]],
+  ['P','Is dawa se neend aayegi kya? Exam chal rahe hain.',[['ask','Will this medicine make me sleepy? I have exams.','It can, a little. That is why it is taken at night.','थोड़ी आ सकती है, इसलिए रात को लेनी है।']]],
+  ['D','Thodi aa sakti hai, isliye raat ko. Das din baad zaroorat ho to aaiye.',[['fu',10]]]]
+};
+/* for walk-ins added from the schedule */
+const CONVO_GENERIC=[['D','Batayiye, kya takleef hai?',[]],['P','Teen din se bukhar aur badan dard.',[['co','Fever and body ache for 3 days']]],['S','BP 120 by 80, temp 100.6.',[['v','bp','120/80'],['v','temp','100.6']]],['D','Viral fever hai. Paracetamol 650 teen baar, cetirizine raat ko. CBC. Teen din baad.',[['dx','Acute febrile illness (viral)'],['med','pcm650','1-1-1','after',3],['med','cet10','0-0-1','after',5],['inv','CBC'],['fu',3]]]];
+/* last visit's medicines, for one-tap repeat */
+const LASTRX={7:{date:'20 Aug 2026',meds:[['telmi40','1-0-0','any',30],['amlo5','0-0-1','any',30]]},2:{date:'22 Sep 2026',meds:[['telmi40','1-0-0','any',30]]}};
+
+/* WhatsApp inbox for the demo */
+const WA_THREADS=[
+ {id:'kavita',name:'Kavita Sharma',tag:'New booking',tcls:'acc',last:'📎 TSH_report.jpg',time:'09:12',play:true},
+ {id:'ramesh',name:'Ramesh Prasad',tag:'Follow-up booked',tcls:'good',last:'1',time:'08:55',msgs:[['out','नमस्ते रमेश जी, कल आपका शुगर फ़ॉलो-अप है। 1 लिखें तो टोकन बुक हो जाएगा, 2 लिखें तो दूसरा दिन।'],['in','1'],['out','टोकन 3 बुक ✔ कल सुबह 8:40। खाली पेट की शुगर जाँच करवाकर आएँ।']]},
+ {id:'arif',name:'Mohd. Arif',tag:'Answered from parchi',tcls:'good',last:'Dawa khane ke baad leni hai na?',time:'08:31',msgs:[['in','Doctor sahab ne jo bukhar ki dawa di, khane ke baad leni hai na?'],['out','जी हाँ। डॉ. सिन्हा की पर्ची के अनुसार: पैरासिटामोल 650, दिन में 3 बार, खाने के बाद, 3 दिन। सेट्रीज़ीन रात को खाने के बाद।'],['out','उल्टी, खून आना या बेहोशी लगे तो तुरंत क्लिनिक आएँ।']],note:'Answered only from the doctor’s own prescription. New medical questions go to the doctor.'},
+ {id:'neha',name:'Neha Gupta',tag:'Sent to doctor',tcls:'warn',last:'Kya main pills band kar doon?',time:'08:02',msgs:[['in','PCOS ki dawa se ulti jaisa lag raha hai, kya main pills band kar doon?'],['out','धन्यवाद। यह सवाल डॉक्टर साहब को भेज दिया गया है। वे आज शाम तक जवाब देंगे। परेशानी ज़्यादा हो तो क्लिनिक आएँ।']],note:'Clinical question: the assistant never advises. It routes to the doctor’s inbox.'},
+ {id:'unknown',name:'+91 98xxx 44120',tag:'Clinic info',tcls:'',last:'Fees kitni hai?',time:'07:46',msgs:[['in','Fees kitni hai aur Sunday ko khula hai?'],['out','डॉ. सिन्हा की फ़ीस ₹500 है (7 दिन में दोबारा दिखाना मुफ़्त)। समय: सुबह 8–11, शाम 5–8। रविवार बंद। समय बुक करने के लिए "बुक" लिखें।']]}
+];
+/* automations: [id, on, title en, title hi, when, sample message (hi)] */
+const WA_AUTO=[
+ ['confirm',true,'Booking confirmation','बुकिंग की पुष्टि','As soon as a slot is booked','टोकन 9 बुक हो गया ✔ शनिवार 10:40, सिन्हा क्लिनिक। मैप: (लिंक)'],
+ ['remind',true,'Reminder with reschedule button','दोबारा समय चुनने के बटन के साथ रिमाइंडर','24 hours and 2 hours before','कल 10:40 बजे डॉ. सिन्हा से आपका अपॉइंटमेंट है। [आ रहे हैं] [समय बदलें] [रद्द करें]'],
+ ['turn',true,'“Your turn is next”','“आपका नंबर आने वाला है”','When 2 tokens are left','टोकन 9: आपसे पहले 2 मरीज़ हैं। लगभग 10 मिनट में आपका नंबर।'],
+ ['rx',true,'Parchi PDF + Hindi dose schedule','पर्ची PDF + हिंदी में खुराक','When the doctor saves','डॉ. सिन्हा की पर्ची संलग्न है। दवा ऐसे लें: पैरासिटामोल, 1 गोली, सुबह-दोपहर-रात, खाने के बाद, 3 दिन।'],
+ ['voice',true,'Hindi voice note of doses','खुराक का हिंदी वॉइस नोट','With the parchi','🔊 0:24 · “नमस्ते, आपकी दवाइयाँ ऐसे लेनी हैं…”'],
+ ['refill',true,'Refill reminder for chronic medicines','पुरानी बीमारी की दवा खत्म होने से पहले याद','3 days before tablets run out','रमेश जी, आपकी शुगर की दवा 3 दिन में खत्म होगी। 1 लिखें, डॉक्टर से दोबारा पर्ची के लिए टोकन बुक हो जाएगा।'],
+ ['followup',true,'Follow-up recall','फ़ॉलो-अप याद','The day before the follow-up date','कल आपका दोबारा दिखाने का दिन है। 1 लिखें तो टोकन बुक हो जाएगा।'],
+ ['reports',false,'Ask for reports before the visit','मुलाक़ात से पहले रिपोर्ट माँगें','After booking','पुरानी पर्ची या जाँच रिपोर्ट हो तो यहीं फ़ोटो भेज दें, डॉक्टर साहब पहले से देख लेंगे।']
+];
+/* recall segments built from the clinic's own records */
+const RECALL=[
+ {id:'hba1c',en:'Diabetics with HbA1c overdue (90+ days)',hi:'जिनका HbA1c 90+ दिन से नहीं हुआ',n:46,msg:'नमस्ते {name} जी, आपकी HbA1c जाँच 3 महीने से नहीं हुई है। डॉ. सिन्हा ने इस हफ़्ते दिखाने को कहा है। 1 लिखें, टोकन बुक हो जाएगा।'},
+ {id:'bp',en:'Hypertensives who missed follow-up',hi:'BP के मरीज़ जो फ़ॉलो-अप पर नहीं आए',n:31,msg:'नमस्ते {name} जी, आपका BP फ़ॉलो-अप छूट गया है। दवा बीच में बंद न करें। 1 लिखें, टोकन बुक हो जाएगा।'},
+ {id:'anc',en:'Pregnant women due for ANC visit',hi:'गर्भवती महिलाएँ, जिनकी ANC जाँच बाकी है',n:9,msg:'नमस्ते {name} जी, आपकी अगली ANC जाँच इस हफ़्ते है। 1 लिखें, टोकन बुक हो जाएगा।'}
+];
+
 window.ARX={svg,MARQUEE,FEATURES,SECURITY,ROADMAP,PLANS,TEAM,FAQ,DRUGS,TPL,ADVICE,PATIENTS,INTAKE_CHAT,
+ CONVO,CONVO_GENERIC,LASTRX,FAVS,WA_THREADS,WA_AUTO,RECALL,
  INV:['CBC','Dengue NS1','FBS','PPBS','HbA1c','Lipid profile','S. creatinine','Urine R/M','Urine C/S','TSH','S. ferritin','Chest X-ray','ECG'],
  COMPLAINTS:['Fever','Cough','Body ache','Headache','Burning urination','Acidity','Giddiness','Weakness','Sneezing','BP check','Sugar follow-up']};
 })();

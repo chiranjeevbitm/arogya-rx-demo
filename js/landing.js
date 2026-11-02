@@ -38,7 +38,7 @@ if('IntersectionObserver' in window){
   const secObs=new IntersectionObserver(es=>{
     es.forEach(e=>{if(e.isIntersecting)setActive(e.target.id);});
   },{rootMargin:'-45% 0px -50% 0px'});
-  ['hero','how','features','security','pricing','more','contact'].forEach(id=>{const el=document.getElementById(id);if(el)secObs.observe(el);});
+  ['hero','how','features','why','security','pricing','more','contact'].forEach(id=>{const el=document.getElementById(id);if(el)secObs.observe(el);});
 }
 links.forEach(a=>{a.addEventListener('mouseenter',()=>moveInd(a));});
 const nav=$('#nav'); if(nav)nav.addEventListener('mouseleave',()=>moveInd(active));
