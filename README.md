@@ -18,6 +18,7 @@ This repo is the **marketing website and a fully clickable demo app**. Everythin
 | Intake | WhatsApp booking assistant (simulated chat with a pre-visit summary); photo intake of an old prescription or lab report (upload, drop or sample) |
 | OPD & Rx | Token queue, one-tap diagnosis templates, Hinglish voice-to-Rx (scripted), medicine search with Jan Aushadhi prices, allergy and duplicate checks, vitals flags, Hindi dose lines, live parchi, A5 print, WhatsApp preview, consult timer |
 | Patients | Search, visit timeline, HbA1c and BP trend charts |
+| Security | Staff logins and roles (switch someone off), who-can-see-what table, read-only activity log, your sessions with log out of other devices |
 | Settings | Letterhead studio (name, Hindi name, degrees, registration, colours, layout), saved in the browser |
 
 ## Feature status

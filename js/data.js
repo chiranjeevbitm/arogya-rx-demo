@@ -10,6 +10,13 @@ const ICONS={
  tap:'<path d="M9 11V5a2 2 0 0 1 4 0v6M13 10a2 2 0 0 1 4 0v4a7 7 0 0 1-7 7 6 6 0 0 1-5-3l-2-4 1-1 3 2V9"/>',
  lang:'<path d="M3 5h12M9 3v2M5 5c1 5 4 8 8 9M13 5c-1 4-4 8-8 10M13 21l4-10 4 10M14.5 18h5"/>',
  rupee:'<path d="M6 4h12M6 9h12M6 4h3a5 5 0 0 1 0 10H6l9 7"/>',
+ lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1.2"/>',
+ key:'<circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 8.7-8.7M16 6l3 3M14 8l2 2"/>',
+ logs:'<path d="M8 6h12M8 12h12M8 18h12"/><path d="M4 6h.01M4 12h.01M4 18h.01"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ server:'<rect x="4" y="4" width="16" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/><path d="M8 7.5h.01M8 16.5h.01"/>',
+ phone:'<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',
+ ban:'<circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/>',
  shield:'<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
  wa:'<path d="M4 20l1.4-4.2A8 8 0 1 1 8.6 19z"/><path d="M9 9.5c.5 2.2 2.3 4 4.5 4.5l1.2-1.2 2 .9"/>',
  mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
@@ -64,7 +71,8 @@ const FEATURES=[
  ['road','lang','More languages: Bhojpuri, Maithili, Bengali, Urdu','और भाषाएँ: भोजपुरी, मैथिली, बांग्ला, उर्दू','Dose instructions and WhatsApp messages in the language your patient reads best.','दवा का समय और WhatsApp संदेश उस भाषा में जो मरीज़ सबसे अच्छी तरह पढ़ता है।','Phase 4 · 2027'],
  ['road','video','Doctor in 10 minutes: teleconsult','10 मिनट में डॉक्टर: टेली-परामर्श','WhatsApp video consults with UPI payment and an e-prescription that follows the Telemedicine Practice Guidelines.','WhatsApp वीडियो परामर्श, UPI भुगतान और टेलीमेडिसिन दिशानिर्देशों के अनुसार ई-पर्ची।','Phase 4 · 2027'],
  ['road','bell','Chronic-care recall campaigns','पुराने मरीज़ों के लिए रिकॉल अभियान','Find every diabetic overdue for HbA1c or every hypertensive who missed follow-up, and remind them in one click.','HbA1c जाँच से छूटे हर डायबिटीज़ मरीज़ या फ़ॉलो-अप भूले हर BP मरीज़ को एक क्लिक में याद दिलाएँ।','Phase 4 · 2027'],
- ['road','shield','DPDP-ready security','DPDP के अनुरूप सुरक्षा','India-hosted, encrypted, a login per staff member, audit log of every change, patient consent and data export.','भारत में होस्ट, एन्क्रिप्टेड, हर स्टाफ़ का अलग लॉगिन, हर बदलाव का ऑडिट लॉग, मरीज़ की सहमति और डेटा निर्यात।','Phase 1 · Nov 2026']
+ ['pilot','lock','Clinic-only access and security','सिर्फ़ आपके क्लिनिक की पहुँच और सुरक्षा','Records are locked to your clinic. A login per staff member with doctor, reception and admin roles, an activity log that cannot be edited, data stored in India and encrypted.','रिकॉर्ड सिर्फ़ आपके क्लिनिक तक सीमित। हर स्टाफ़ का अलग लॉगिन (डॉक्टर, रिसेप्शन, एडमिन), ऐसा ऑडिट लॉग जो बदला नहीं जा सकता, डेटा भारत में और एन्क्रिप्टेड।','Phase 1 · Nov 2026'],
+ ['road','shield','OTP login, backups and DPDP consent','OTP लॉगिन, बैकअप और DPDP सहमति','A one-time code on your mobile at login, daily backups, and patient consent records with data export under the DPDP Act.','लॉगिन पर मोबाइल OTP, रोज़ का बैकअप, और DPDP कानून के अनुसार मरीज़ की सहमति का रिकॉर्ड व डेटा निर्यात।','Phase 1–2 · Nov–Dec 2026']
 ].map(f=>({st:f[0],ic:f[1],t:{en:f[2],hi:f[3]},d:{en:f[4],hi:f[5]},ph:f[6]}));
 
 const ROADMAP=[
@@ -88,7 +96,7 @@ const TEAM=[
 ];
 
 const FAQ=[
- [{en:'Is patient data safe?',hi:'क्या मरीज़ का डेटा सुरक्षित है?'},{en:'It is stored in India and encrypted. Each staff member has their own login and every change is logged. WhatsApp messages go only after the patient agrees. You can export everything at any time.',hi:'डेटा भारत में, एन्क्रिप्टेड रहता है। हर स्टाफ़ का अलग लॉगिन, हर बदलाव दर्ज। WhatsApp तभी जाता है जब मरीज़ सहमति दे। आप कभी भी सारा डेटा निकाल सकते हैं।'}],
+ [{en:'Is patient data safe?',hi:'क्या मरीज़ का डेटा सुरक्षित है?'},{en:'Yes. Records are locked to your clinic: only the logins you create can open them, and you as admin decide who gets one. Reception sees only front-desk screens. Data is stored in India and encrypted, passwords are never stored, and every login and change goes into a log nobody can edit.',hi:'हाँ। रिकॉर्ड सिर्फ़ आपके क्लिनिक तक सीमित हैं: केवल आपके बनाए लॉगिन ही इन्हें खोल सकते हैं, और एडमिन के रूप में आप तय करते हैं कि किसे लॉगिन मिले। रिसेप्शन को सिर्फ़ फ़्रंट-डेस्क स्क्रीन दिखती है। डेटा भारत में और एन्क्रिप्टेड रहता है, पासवर्ड कभी सेव नहीं होते, और हर लॉगिन व बदलाव ऐसे लॉग में दर्ज होता है जिसे कोई बदल नहीं सकता।'}],
  [{en:'I’m faster with a pen.',hi:'मैं पेन से ज़्यादा तेज़ हूँ।'},{en:'Most visits match one of your ten common diagnoses. A template fills medicines, doses and advice in one tap; you change only what differs. Voice input handles the rest.',hi:'ज़्यादातर मरीज़ आपके दस आम निदानों में से किसी एक के होते हैं। टेम्पलेट एक टैप में दवा, खुराक और सलाह भर देता है; आप केवल जो अलग है बदलें। बाकी बोलकर।'}],
  [{en:'What if the internet goes down?',hi:'इंटरनेट चला जाए तो?'},{en:'The offline mode (Phase 2) keeps prescriptions and printing working. Everything syncs and WhatsApp messages go out when the connection returns.',hi:'ऑफ़लाइन मोड (चरण 2) में पर्ची और प्रिंट चलते रहते हैं। कनेक्शन लौटने पर सब सिंक हो जाता है और WhatsApp संदेश चले जाते हैं।'}],
  [{en:'Can my compounder use it?',hi:'क्या मेरा कंपाउंडर इसे चला पाएगा?'},{en:'The reception screen has only name, age, phone and complaint. It creates the token and the patient appears in your queue.',hi:'रिसेप्शन स्क्रीन में केवल नाम, उम्र, फ़ोन और तकलीफ़। टोकन बनता है और मरीज़ आपकी कतार में आ जाता है।'}],
@@ -96,6 +104,23 @@ const FAQ=[
  [{en:'Do I need a computer?',hi:'क्या कंप्यूटर ज़रूरी है?'},{en:'No. It runs in the browser on a laptop, tablet or Android phone, and prints to any printer, including on your existing pre-printed pad.',hi:'नहीं। यह लैपटॉप, टैबलेट या एंड्रॉइड फ़ोन के ब्राउज़र में चलता है, और किसी भी प्रिंटर पर छपता है, आपके छपे हुए पैड पर भी।'}]
 ];
 
+
+/* security features shown on the landing page: [status, icon, title en, title hi, detail en, detail hi] */
+const SECURITY=[
+ ['in','lock','Locked to your clinic','सिर्फ़ आपके क्लिनिक तक','Every record carries your clinic’s ID and is checked on every request. A login from another clinic cannot open it.','हर रिकॉर्ड पर आपके क्लिनिक की पहचान है और हर बार जाँची जाती है। दूसरे क्लिनिक का लॉगिन इसे नहीं खोल सकता।'],
+ ['in','users','One login per person, with roles','हर व्यक्ति का अलग लॉगिन, भूमिका के साथ','You, as doctor and admin, see everything. Reception sees only front-desk screens: registration, queue, vitals, appointments and bills.','डॉक्टर और एडमिन के रूप में आप सब देखते हैं। रिसेप्शन को सिर्फ़ फ़्रंट-डेस्क स्क्रीन: रजिस्ट्रेशन, कतार, वाइटल्स, अपॉइंटमेंट और बिल।'],
+ ['in','ban','Remove access in one tap','एक टैप में पहुँच बंद','Switch off a staff login or change its role and every device they are signed in on is logged out at once.','किसी स्टाफ़ का लॉगिन बंद करें या भूमिका बदलें, उसके हर डिवाइस से तुरंत लॉग आउट।'],
+ ['in','key','Passwords are never stored','पासवर्ड कभी सेव नहीं होते','Only a one-way scrypt hash is kept, so nobody, including us, can read your password.','सिर्फ़ एकतरफ़ा scrypt हैश रखा जाता है, इसलिए आपका पासवर्ड कोई नहीं पढ़ सकता, हम भी नहीं।'],
+ ['in','shield','Encrypted on the wire and on disk','भेजते समय और रखते समय एन्क्रिप्टेड','Every page loads over HTTPS. The database and scanned files are encrypted at rest (AES-256).','हर पेज HTTPS पर खुलता है। डेटाबेस और स्कैन की गई फ़ाइलें रखते समय एन्क्रिप्टेड (AES-256)।'],
+ ['in','building','Stored in India','डेटा भारत में','The database and files live in a Mumbai data centre. Scans sit in a private bucket that needs your login to open.','डेटाबेस और फ़ाइलें मुंबई के डेटा सेंटर में। स्कैन एक प्राइवेट बकेट में, जो आपके लॉगिन के बिना नहीं खुलता।'],
+ ['in','server','Database closed to the internet','डेटाबेस इंटरनेट से बंद','Records sit in a private schema the public API cannot reach, with row-level security switched on for every table.','रिकॉर्ड एक प्राइवेट स्कीमा में हैं जहाँ पब्लिक API नहीं पहुँचता, और हर टेबल पर row-level security चालू है।'],
+ ['in','logs','Activity log nobody can edit','ऐसा ऑडिट लॉग जिसे कोई बदल नहीं सकता','Every login and change is recorded with who, what, when and from where. Entries cannot be changed or deleted.','हर लॉगिन और बदलाव दर्ज: किसने, क्या, कब और कहाँ से। ये प्रविष्टियाँ न बदली जा सकती हैं, न मिटाई जा सकती हैं।'],
+ ['in','clock','Automatic log-out','अपने-आप लॉग आउट','Sessions end after 14 hours. Changing your password signs out every other device. Repeated wrong passwords are slowed down.','14 घंटे बाद सत्र खत्म। पासवर्ड बदलते ही बाकी सभी डिवाइस से लॉग आउट। बार-बार गलत पासवर्ड पर लॉगिन धीमा हो जाता है।'],
+ ['in','brain','AI only drafts','AI सिर्फ़ ड्राफ़्ट बनाता है','Voice and photo intake return drafts. Nothing is saved or printed until you review it.','आवाज़ और फ़ोटो से सिर्फ़ ड्राफ़्ट बनते हैं। आपकी जाँच के बिना कुछ सेव या प्रिंट नहीं होता।'],
+ ['soon','phone','OTP login on your mobile','मोबाइल पर OTP लॉगिन','A one-time code on your mobile in addition to your password.','पासवर्ड के साथ मोबाइल पर एक बार का कोड।'],
+ ['soon','save','Daily backups','रोज़ का बैकअप','A copy of your clinic’s data every day that can be restored if anything goes wrong.','हर दिन आपके क्लिनिक के डेटा की कॉपी, जिसे ज़रूरत पड़ने पर वापस लाया जा सके।'],
+ ['soon','id','Patient consent and data export (DPDP)','मरीज़ की सहमति और डेटा निर्यात (DPDP)','Consent records for each patient and a full export of your data at any time, in line with the DPDP Act.','हर मरीज़ की सहमति का रिकॉर्ड और कभी भी आपके पूरे डेटा का निर्यात, DPDP कानून के अनुसार।']
+].map(f=>({st:f[0],ic:f[1],t:{en:f[2],hi:f[3]},d:{en:f[4],hi:f[5]}}));
 
 /* phrases for the scrolling strip on the landing page */
 const MARQUEE=[['Your own letterhead','आपका अपना letterhead'],['Hindi dose timings','हिंदी में खुराक'],['Generic names in CAPITALS','जेनेरिक नाम बड़े अक्षरों में'],['Jan Aushadhi prices','जन औषधि की कीमतें'],['Allergy checks','एलर्जी जाँच'],['WhatsApp parchi','WhatsApp पर्ची'],['Hinglish voice','हिंग्लिश में बोलकर'],['Photo intake','फ़ोटो से इतिहास'],['Token queue','टोकन कतार'],['HbA1c and BP trends','HbA1c और BP ट्रेंड']].map(m=>({en:m[0],hi:m[1]}));
@@ -178,7 +203,7 @@ const INTAKE_CHAT=[
  ['in','📎 TSH_report.jpg'],
  ['out','धन्यवाद। रिपोर्ट मिल गई। डॉक्टर साहब को आपकी जानकारी पहले से भेज दी गई है। कल मिलते हैं।']
 ];
-window.ARX={svg,MARQUEE,FEATURES,ROADMAP,PLANS,TEAM,FAQ,DRUGS,TPL,ADVICE,PATIENTS,INTAKE_CHAT,
+window.ARX={svg,MARQUEE,FEATURES,SECURITY,ROADMAP,PLANS,TEAM,FAQ,DRUGS,TPL,ADVICE,PATIENTS,INTAKE_CHAT,
  INV:['CBC','Dengue NS1','FBS','PPBS','HbA1c','Lipid profile','S. creatinine','Urine R/M','Urine C/S','TSH','S. ferritin','Chest X-ray','ECG'],
  COMPLAINTS:['Fever','Cough','Body ache','Headache','Burning urination','Acidity','Giddiness','Weakness','Sneezing','BP check','Sugar follow-up']};
 })();

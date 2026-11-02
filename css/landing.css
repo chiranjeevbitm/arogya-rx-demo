@@ -428,6 +428,55 @@ html[lang="hi"] .lp-h1{line-height:1.18;letter-spacing:-.015em;font-size:clamp(3
   .frow-h .chev{grid-column:3;grid-row:1}
 }
 
+/* ---------- security: copy left, "who can open a record" vault right ---------- */
+.sec-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,72px);align-items:center}
+.sec-pts{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:22px 28px}
+.sec-pts li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:start}
+.sec-pts .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.sec-pts .ic svg{width:20px;height:20px}
+.sec-pts b{font-family:var(--f-lp);font-weight:600;font-size:16.5px;letter-spacing:-.01em}
+.sec-pts p{color:var(--muted);font-size:14.5px;margin-top:2px}
+.vault{position:relative;isolation:isolate;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--surface);padding:24px;box-shadow:0 30px 70px -40px color-mix(in srgb,var(--accent) 55%,transparent);overflow:hidden}
+.vault::before{content:"";position:absolute;inset:-40% -20% auto;height:260px;z-index:-1;background:radial-gradient(closest-side,color-mix(in srgb,var(--good) 16%,transparent),transparent);pointer-events:none}
+.vault-top{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.vault-core{position:relative;width:64px;height:64px;flex:none;display:grid;place-items:center}
+.vlock{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:var(--good);color:var(--surface);position:relative;z-index:1;box-shadow:0 10px 26px -10px color-mix(in srgb,var(--good) 80%,transparent)}
+.vlock svg{width:26px;height:26px}
+.vring{position:absolute;inset:6px;border-radius:20px;border:2px solid var(--good);opacity:0}
+.rv.in .vring{animation:vring 2.8s var(--ease) infinite .9s}
+.rv.in .vring.r2{animation-delay:2.3s}
+@keyframes vring{0%{transform:scale(.85);opacity:.55}100%{transform:scale(1.6);opacity:0}}
+.vault-h{font-family:var(--f-lp);font-weight:600;font-size:clamp(17px,1.5vw,20px);letter-spacing:-.01em;line-height:1.25}
+.access{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.access li{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--bg)}
+.access .av{width:36px;height:36px;font-size:12.5px}
+.access .av svg{width:17px;height:17px}
+.access .who{font-weight:600;font-size:14.5px;min-width:0}
+.pill-st{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:3px 10px 3px 6px;border-radius:99px;white-space:nowrap}
+.pill-st i{font-style:normal;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:11px}
+.access .ok .pill-st{background:var(--good-soft);color:var(--good)}.access .ok .pill-st i{background:var(--good);color:var(--surface)}
+.access .part .pill-st{background:var(--accent-soft);color:var(--accent)}.access .part .pill-st i{background:var(--accent);color:var(--accent-ink)}
+.access .no .pill-st{background:var(--crit-soft);color:var(--crit)}.access .no .pill-st i{background:var(--crit);color:var(--surface)}
+.access .no .av{background:var(--surface-2);color:var(--muted)}
+.access .no .who{color:var(--muted)}
+.js .vault .access li{opacity:0;transform:translateX(16px)}
+.vault.in .access li{animation:accIn .7s var(--ease) both;animation-delay:calc(var(--i)*140ms + .35s)}
+.vault.in .access .no{animation:accIn .7s var(--ease) both,accNo .5s var(--ease) both;animation-delay:calc(var(--i)*140ms + .35s),calc(var(--i)*140ms + 1.05s)}
+@keyframes accIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+@keyframes accNo{0%,100%{translate:0}30%{translate:-4px}60%{translate:3px}}
+.vault-foot{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);font-size:12px;color:var(--muted);letter-spacing:.02em;text-align:center}
+.sec-us{display:flex;align-items:center;justify-content:center;gap:10px;margin:36px auto 0;max-width:640px;text-align:center;color:var(--muted);font-size:15px}
+.sec-us [data-ic]{color:var(--good);display:grid;flex:none}.sec-us svg{width:18px;height:18px}
+.seclist{padding-top:32px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
+.srow{display:grid;grid-template-columns:24px minmax(0,1fr);gap:14px;padding:16px 2px;border-bottom:1px solid var(--line)}
+.srow .ic{color:var(--accent);display:grid;padding-top:2px}.srow .ic svg{width:19px;height:19px}
+.srow-t{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.srow-t b{font-size:15px}
+.srow p{color:var(--muted);font-size:14.5px;margin-top:3px}
+@media (max-width:1020px){.sec-grid{grid-template-columns:1fr}.vault{max-width:560px;width:100%;margin-inline:auto}.seclist{grid-template-columns:1fr}}
+@media (max-width:760px){.sec-pts{grid-template-columns:1fr}.vault{padding:18px}.access li{grid-template-columns:32px minmax(0,1fr);row-gap:6px}.access .av{width:32px;height:32px}.access .pill-st{grid-column:2;justify-self:start}.sec-us{text-align:left;align-items:flex-start}}
+@media (prefers-reduced-motion:reduce){.js .vault .access li{opacity:1;transform:none}.vault.in .access li,.vault.in .access .no,.rv.in .vring{animation:none}}
+
 /* ---------- reduced motion: show everything in its final state ---------- */
 @media (prefers-reduced-motion:reduce){
   .js .rv,.js .rv .st,.js .stage.seq .fc,.js .lp-hero-copy>*,.stage,.lp-h1 .ln{opacity:1!important;transform:none!important;filter:none!important;translate:none!important}

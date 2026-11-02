@@ -52,6 +52,10 @@ function renderLanding(){
  $('#plans').innerHTML=X.PLANS.slice(0,3).map((p,i)=>{const price=bill==='m'?p.m:p.y;const per=bill==='m'?hiOr('/ month','/ महीना'):hiOr('/ year','/ साल');
   return `<div class="pcard ${p.feat?'feat':''} st" style="--i:${i}">${p.feat?`<span class="ribbon">${hiOr('Most clinics','ज़्यादातर क्लिनिक')}</span>`:''}<h3>${esc(L(p.t))}</h3><div class="pp"><span class="amt">₹${price.toLocaleString('en-IN')}</span><small>${price?per:hiOr('forever','हमेशा')}</small></div><p class="note">${esc(L(p.note))}</p><a class="btn ${p.feat?'primary':''} full" href="${p.m?'#contact':'#login'}">${p.m?hiOr('Book a demo visit','डेमो विज़िट माँगें'):hiOr('Start free','मुफ़्त शुरू करें')}</a>${disc('pl-'+i,`<ul class="checks">${L(p.items).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`)}</div>`;}).join('');
  $('#teamGrid').innerHTML=X.TEAM.map(m=>`<div class="mem"><span class="pic">${esc(m.ini)}</span><div><h3>${esc(m.name)}</h3><div class="role">${esc(L(m.role))}</div><p>${esc(L(m.bio))}</p>${m.links.length?`<div class="links">${m.links.map(l=>`<a href="${l[1]}" ${l[1].startsWith('http')||l[1].endsWith('.pdf')?'target="_blank" rel="noopener"':''}>${esc(l[0])} →</a>`).join('')}</div>`:''}</div></div>`).join('');
+ const sl=$('#secList');if(sl&&X.SECURITY){const SL={in:['good',t('sec.in')],soon:['warn',t('sec.soon')]};
+  sl.innerHTML=X.SECURITY.map((f,i)=>`<div class="srow st" style="--i:${Math.min(i,10)}"><span class="ic">${svg(f.ic)}</span><div><div class="srow-t"><b>${esc(L(f.t))}</b><span class="tag ${SL[f.st][0]}">${esc(SL[f.st][1])}</span></div><p>${esc(L(f.d))}</p></div></div>`).join('');
+  const st=$('#sec-total');if(st)st.textContent=X.SECURITY.length;}
+ $$('[data-ic]').forEach(e=>{if(!e.firstElementChild)e.innerHTML=svg(e.dataset.ic);});
  $('#faqGrid').innerHTML=X.FAQ.map((q,i)=>{const id='faq-'+i,o=OPEN.has(id);return `<div class="fq"><button class="fq-h" type="button" data-disc="${id}" aria-expanded="${o}" aria-controls="${id}"><span>${esc(L(q[0]))}</span><span class="chev" aria-hidden="true"></span></button>${disc(id,`<p>${esc(L(q[1]))}</p>`)}</div>`;}).join('');
  const hs=$('#hvSave');if(hs){const p=cur()||S.patients[2];hs.textContent=inr(cost(p.rx).s);}
  renderPapers();
@@ -139,12 +143,12 @@ function parchi(p){const Lh=S.lh,rx=p.rx,v=rx.v,fuDate=rx.fu?addDays(rx.fu):null
 function renderPapers(){const p=cur()||S.patients[2];const h=parchi(p);['#heroPaper','#shotPaper','#sidePaper','#studioPaper'].forEach(s=>{const e=$(s);if(e)e.innerHTML=h;});}
 
 /* ---------------- app shell ---------------- */
-const VIEWS=[['home','home'],['schedule','cal'],['intake','inbox'],['opd','rx'],['patients','users'],['settings','gear']];
+const VIEWS=[['home','home'],['schedule','cal'],['intake','inbox'],['opd','rx'],['patients','users'],['security','lock'],['settings','gear']];
 let VIEW='home';
 function renderApp(){
  $('#sidebar').innerHTML=VIEWS.map(v=>`<button data-go="${v[0]}" ${VIEW===v[0]?'aria-current="page"':''}>${svg(v[1])}<span>${esc(t('app.'+v[0]))}</span></button>`).join('')+
   `<button data-act="logout">${svg('out')}<span>${esc(t('app.logout'))}</span></button><div class="doc"><span class="av">${esc(S.lh.doctor.replace(/^Dr\.?\s*/,'').split(' ').map(w=>w[0]).join('').slice(0,2))}</span><span><b>${esc(S.lh.doctor)}</b>${esc(S.lh.clinic)}</span></div>`;
- ({home:vHome,schedule:vSchedule,intake:vIntake,opd:vOpd,patients:vPatients,settings:vSettings})[VIEW]();
+ ({home:vHome,schedule:vSchedule,intake:vIntake,opd:vOpd,patients:vPatients,security:vSecurity,settings:vSettings})[VIEW]();
 }
 function go(v){VIEW=v;location.hash='#app-'+v;}
 
@@ -298,6 +302,37 @@ function vSettings(){const l=S.lh;
 /* modal, WhatsApp, print */
 function openModal(title,html){$('#modalTitle').textContent=title;$('#modalBody').innerHTML=html;$('#modal').hidden=false;$('#modal .btn').focus();}
 function closeModal(){$('#modal').hidden=true;}
+
+/* ---------------- security (sample data; the real app enforces this on the server) ---------------- */
+const nowT=()=>new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+const SEC={
+ staff:[{id:'s1',name:'',role:'Doctor · Admin',scope:'full',active:true,you:true,dev:2},{id:'s2',name:'Sunita Kumari',role:'Reception',scope:'desk',active:true,dev:1},{id:'s3',name:'Ramesh Prasad',role:'Reception',scope:'desk',active:true,dev:1}],
+ log:[['10:41','Dr. (you)','Printed prescription · Sita Devi','This laptop'],['10:38','Sunita Kumari','Recorded vitals · token 4','Reception PC'],['10:22','Sunita Kumari','Registered new patient · Kavita Sharma','Reception PC'],['09:58','Dr. (you)','Opened history · Ram Prasad Singh','This laptop'],['09:31','Sunita Kumari','Logged in','Reception PC'],['09:30','Dr. (you)','Logged in','This laptop']],
+ sessions:[['This laptop · Chrome','Muzaffarpur · active now',true],['Android phone · Chrome','Muzaffarpur · 2 hours ago',false]]
+};
+function secLog(who,what,where){SEC.log.unshift([nowT(),who,what,where||'This laptop']);}
+function vSecurity(){const H=(en,hi)=>LANG==='hi'?hi:en;
+ const me=SEC.staff[0];me.name=S.lh.doctor;
+ const tick='<span class="perm y" aria-label="yes">✓</span>',dash='<span class="perm n" aria-label="no">—</span>';
+ const M=[[H('Prescriptions and visit history','पर्ची और पुराना इलाज'),1,0],[H('Lab reports and scans','लैब रिपोर्ट और स्कैन'),1,0],[H('Registration, queue and vitals','रजिस्ट्रेशन, कतार और वाइटल्स'),1,1],[H('Appointments and bills','अपॉइंटमेंट और बिल'),1,1],[H('Staff logins and settings','स्टाफ़ लॉगिन और सेटिंग्स'),1,0],[H('Activity log','ऑडिट लॉग'),1,0]];
+ $('#view').innerHTML=`<div class="view-h"><div><h2>${esc(t('app.security'))}</h2><p>${H('Only your clinic’s logins can open these records. You are the admin. Sample data in this demo.','रिकॉर्ड सिर्फ़ आपके क्लिनिक के लॉगिन से खुलते हैं। एडमिन आप हैं। डेमो में सैंपल डेटा।')}</p></div><span class="sec-ok">${svg('shield')} ${H('Protected','सुरक्षित')}</span></div>
+ <div class="kpis sec-kpis">${[['building',H('Stored in India','डेटा भारत में'),H('Mumbai data centre','मुंबई डेटा सेंटर')],['lock',H('Encrypted','एन्क्रिप्टेड'),H('HTTPS · AES-256 at rest','HTTPS · डिस्क पर AES-256')],['logs',H('Activity log','ऑडिट लॉग'),H('Cannot be edited','बदला नहीं जा सकता')],['clock',H('Auto log-out','अपने-आप लॉग आउट'),H('After 14 hours','14 घंटे बाद')]].map(k=>`<div class="kpi sk"><span class="ic">${svg(k[0])}</span><div><b>${esc(k[1])}</b><small>${esc(k[2])}</small></div></div>`).join('')}</div>
+ <div class="two sec-two">
+  <div class="card"><div class="card-h"><h3>${H('Staff and access','स्टाफ़ और पहुँच')}</h3><button class="btn sm" data-act="sec-add">+ ${H('Add staff','स्टाफ़ जोड़ें')}</button></div>
+   ${SEC.staff.map(u=>`<div class="staff ${u.active?'':'off'}"><span class="av">${esc(u.name.replace(/^Dr\.?\s*/,'').split(' ').map(w=>w[0]).join('').slice(0,2))}</span><span style="min-width:0"><b>${esc(u.name)}</b>${u.you?` <span class="tag acc">${H('You','आप')}</span>`:''}<br><small>${esc(u.role)} · ${u.scope==='full'?H('Full access','पूरी पहुँच'):H('Front desk only','सिर्फ़ फ़्रंट डेस्क')}${u.active?'':' · '+H('Switched off','बंद')}</small></span>${u.you?'<span class="tag good">Admin</span>':`<button class="btn sm ${u.active?'':'primary'}" data-staff="${u.id}">${u.active?H('Switch off','बंद करें'):H('Switch on','चालू करें')}</button>`}</div>`).join('')}
+   <p class="fine-note">${H('Switching a login off signs that person out of every device at once.','लॉगिन बंद करते ही वह व्यक्ति हर डिवाइस से तुरंत लॉग आउट हो जाता है।')}</p></div>
+  <div class="card"><h3>${H('Who can see what','कौन क्या देख सकता है')}</h3>
+   <table class="perm-t"><thead><tr><th></th><th>${H('Doctor · Admin','डॉक्टर · एडमिन')}</th><th>${H('Reception','रिसेप्शन')}</th></tr></thead><tbody>${M.map(r=>`<tr><td>${esc(r[0])}</td><td>${r[1]?tick:dash}</td><td>${r[2]?tick:dash}</td></tr>`).join('')}<tr class="ext"><td>${H('Other clinics, anyone on the internet','दूसरे क्लिनिक, इंटरनेट पर कोई भी')}</td><td colspan="2"><span class="perm x">✕ ${H('No access','पहुँच नहीं')}</span></td></tr></tbody></table></div>
+ </div>
+ <div class="two sec-two">
+  <div class="card"><div class="card-h"><h3>${H('Activity log','ऑडिट लॉग')}</h3><span class="tag">${H('Read-only','सिर्फ़ पढ़ने के लिए')}</span></div>
+   <div class="alog">${SEC.log.slice(0,8).map(l=>`<div class="arow"><b class="mono">${esc(l[0])}</b><span style="min-width:0"><b>${esc(l[1])}</b> · ${esc(l[2])}<br><small>${esc(l[3])}</small></span></div>`).join('')}</div>
+   <p class="fine-note">${H('Every login, view, change and print is recorded. Entries cannot be edited or deleted, not even by the admin.','हर लॉगिन, देखना, बदलाव और प्रिंट दर्ज होता है। ये प्रविष्टियाँ बदली या मिटाई नहीं जा सकतीं, एडमिन भी नहीं।')}</p></div>
+  <div class="card"><h3>${H('Your sessions','आपके सत्र')}</h3>
+   ${SEC.sessions.map(x=>`<div class="staff"><span class="av">${svg(x[0].startsWith('Android')?'phone':'home')}</span><span style="min-width:0"><b>${esc(x[0])}</b><br><small>${esc(x[1])}</small></span>${x[2]?`<span class="tag good">${H('This device','यह डिवाइस')}</span>`:''}</div>`).join('')}
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn sm" data-act="sec-out" ${SEC.sessions.length<2?'disabled':''}>${H('Log out all other devices','बाकी सभी डिवाइस से लॉग आउट')}</button><button class="btn sm" data-act="sec-pass">${H('Change password','पासवर्ड बदलें')}</button></div>
+   <p class="fine-note">${H('Passwords are stored only as a one-way hash, so nobody can read them. Repeated wrong passwords slow the login down.','पासवर्ड सिर्फ़ एकतरफ़ा हैश के रूप में रखे जाते हैं, कोई उन्हें पढ़ नहीं सकता। बार-बार गलत पासवर्ड पर लॉगिन धीमा हो जाता है।')}</p></div>
+ </div>`;}
 function printView(){const p=cur();openModal('A5 print preview · '+p.name,`<p style="color:var(--muted);font-size:14px;margin-bottom:12px">In the clinic this goes to your printer on A5, or onto your pre-printed pad with the header switched off.</p><div class="a5">${parchi(p)}</div><div style="text-align:center;margin-top:12px"><button class="btn primary" data-act="real-print">${svg('print')} Print now</button></div>`);}
 function waView(){const p=cur(),rx=p.rx,Lh=S.lh;if(!rx.meds.length){toast('Add medicines first');return;}const fuD=rx.fu?addDays(rx.fu):null;S.sent++;
  const lines=rx.meds.map(m=>{const d=DRUG[m.id],tm=TIMING[m.timing];const nm=d.g.split(' ')[0];return `<li><b>${esc(nm.charAt(0)+nm.slice(1).toLowerCase())}</b>: ${esc(doseHi(m,d))}, ${esc(FREQ[m.freq].hi)}${tm.hi?', '+tm.hi:''}, ${esc(daysHi(m))}</li>`;}).join('');
@@ -349,11 +384,15 @@ document.addEventListener('click',e=>{const b=e.target.closest('button,[data-ope
  if(d.ink){S.lh.ink=d.ink;store.set('arx-lh',S.lh);$$('[data-ink]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.ink===d.ink?'true':'false'));renderPapers();return;}
  if(d.layout){S.lh.layout=d.layout;store.set('arx-lh',S.lh);$$('[data-layout]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.layout===d.layout?'true':'false'));renderPapers();return;}
  if(d.doc){S.doc=d.doc;$$('[data-doc]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.doc===S.doc?'true':'false'));sampleShot();return;}
+ if(d.staff){const u=SEC.staff.find(x=>x.id===d.staff);u.active=!u.active;secLog('Dr. (you)',(u.active?'Switched on login · ':'Switched off login · ')+u.name);toast(u.active?`${u.name} can log in again.`:`${u.name}'s login is off. Logged out of ${u.dev} device${u.dev>1?'s':''} (demo).`);vSecurity();return;}
  const a=d.act;if(!a)return;
  const ACT={voice:runVoice,next:saveNext,print:printView,wa:waView,close:closeModal,'real-print':()=>window.print(),'sample-shot':sampleShot,'intake-history':()=>intakeTo('history'),'intake-rx':()=>intakeTo('rx'),'play-chat':playChat,'reset-chat':()=>{S.chat=[];S.chatDone=false;vIntake();},
   'chat-to-queue':()=>{const ap=S.appts.find(x=>x.name==='Kavita Sharma');if(ap&&ap.status==='booked'){arrive(ap.id);const p=S.patients.at(-1);p.cond=['Hypothyroid'];p.age=38;p.co='Fatigue and hair fall for 2 weeks. TSH 7.8 (high).';p.rx.co=p.co;p.rx.inv=['TSH'];}else toast('Already in the queue');},
   logout:()=>{store.set('arx-auth',false);location.hash='#top';toast('Logged out');},
   reset:()=>{const lh=S.lh;S=seed();S.lh=lh;chatLog=[];vOpd();toast('Demo reset');},
+  'sec-add':()=>toast(LANG==='hi'?'डेमो: असली ऐप में नाम, मोबाइल और भूमिका डालकर स्टाफ़ जोड़ते हैं।':'Demo: in the real app you add a name, mobile number and role.'),
+  'sec-out':()=>{SEC.sessions=SEC.sessions.filter(x=>x[2]);secLog('Dr. (you)','Logged out all other devices');toast(LANG==='hi'?'बाकी सभी डिवाइस से लॉग आउट हो गया (डेमो)।':'All other devices are logged out (demo).');vSecurity();},
+  'sec-pass':()=>toast(LANG==='hi'?'डेमो: पासवर्ड बदलते ही बाकी डिवाइस अपने-आप लॉग आउट हो जाते हैं।':'Demo: changing your password logs out every other device.'),
   'lh-reset':()=>{S.lh=Object.assign({},LH0);store.set('arx-lh',{});vSettings();}};
  if(ACT[a])ACT[a]();
 });
